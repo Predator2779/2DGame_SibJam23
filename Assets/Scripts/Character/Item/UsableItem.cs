@@ -40,7 +40,11 @@ public class UsableItem : MonoBehaviour
             enabled = false;
 
         if (_destroyAfterUsing)
-            Destroy(gameObject);
+        {
+            EventHandler.OnItemDestroy?.Invoke();
+            enabled = false;
+            transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        }
     }
 
     public virtual void SecondaryAction() { }

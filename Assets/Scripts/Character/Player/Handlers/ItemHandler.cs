@@ -1,14 +1,13 @@
 using Scripts.Character.Classes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour
 {
     [SerializeField] private Character _character;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
-    [SerializeField] private Image _iconUI; 
-    
+    [SerializeField] private Image _iconUI;
+
     private TransportableItem _selectedItem;
     private TransportableItem _holdedItem;
     private Sprite _currentIcon;
@@ -16,6 +15,11 @@ public class ItemHandler : MonoBehaviour
 
     public bool IsHolded { get; private set; }
     public TransportableItem HoldedItem => _holdedItem;
+
+    private void Start()
+    {
+        EventHandler.OnItemDestroy.AddListener(PutItem);
+    }
 
     // ReSharper disable Unity.PerformanceAnalysis
     public void PickUpItem()
@@ -44,7 +48,7 @@ public class ItemHandler : MonoBehaviour
             GetSpriteRenderer(_holdedItem.transform).sortingOrder = _itemSortingOrder;
             SwitchSpriteItem(_holdedItem, _currentIcon);
             SetIconToUI(null);
-            
+
             _holdedItem.Put();
             _holdedItem = null;
             SetCharacterItem(null);
@@ -53,12 +57,12 @@ public class ItemHandler : MonoBehaviour
         }
     }
 
-    public void SwitchSpriteItem(TransportableItem item, Sprite sprite)
+    private void SwitchSpriteItem(TransportableItem item, Sprite sprite)
     {
         _currentIcon = item.GetComponentInChildren<SpriteRenderer>().sprite;
         item.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
     }
-    
+
     private void SetIconToUI(TransportableItem item)
     {
         if (item == null)
@@ -67,12 +71,12 @@ public class ItemHandler : MonoBehaviour
             _iconUI.gameObject.SetActive(false);
             return;
         }
-        
+
         var icon = item.GetComponentInChildren<SpriteRenderer>().sprite;
         _iconUI.sprite = icon;
         _iconUI.gameObject.SetActive(true);
     }
-    
+
     private void SetSpriteSortOrder()
     {
         var tempSprite = GetSpriteRenderer(_holdedItem.transform);
@@ -84,7 +88,7 @@ public class ItemHandler : MonoBehaviour
 
     private SpriteRenderer GetSpriteRenderer(Transform t) => t.GetChild(0).GetComponent<SpriteRenderer>();
 
-    private void SetCharacterItem(TransportableItem item) => _character.holdedItem = item;//
+    private void SetCharacterItem(TransportableItem item) => _character.holdedItem = item; //
 
     public void SelectItem(TransportableItem item)
     {
@@ -103,7 +107,7 @@ public class ItemHandler : MonoBehaviour
         if (collision.TryGetComponent(out TransportableItem item))
             _selectedItem = item;
     }
-    
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out TransportableItem item) && item == _selectedItem)

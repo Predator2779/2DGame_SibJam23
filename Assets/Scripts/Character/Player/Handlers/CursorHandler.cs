@@ -1,5 +1,4 @@
-﻿using Scripts.Core.Global;
-using UnityEngine;
+﻿using UnityEngine;
     
 namespace Scripts.Character.Player.Handlers
 {
