@@ -5,7 +5,7 @@ namespace Scripts.Core.Global
     public class GameState : MonoBehaviour
     {
         public static GameState instance;
-        public GameStates State { get => _state; set => _state = value; }
+        public GameStates State { get => _state; private set => _state = value; }
         
         [SerializeField] private GameStates _state;
         [SerializeField] private GameObject _menuPanel;
@@ -55,6 +55,8 @@ namespace Scripts.Core.Global
             
             _currentLevel = Instantiate(_levelPrefab);
             _menuPanel.SetActive(false);
+            
+            Play();
         }
         
         public void DestroyLevel()
