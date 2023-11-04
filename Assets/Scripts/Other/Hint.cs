@@ -27,13 +27,13 @@ public class Hint : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (_gameState.CurrentState == GameStates.Playing && collision.transform.tag == "Player")
+        if (_gameState.State == GameStates.Playing && collision.transform.tag == "Player")
             HintSetActive(true, _textHint);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_gameState.CurrentState == GameStates.Playing && collision.transform.tag == "Player")
+        if (_gameState.State == GameStates.Playing && collision.transform.tag == "Player")
             HintSetActive(false);
     }
 

@@ -41,7 +41,7 @@ namespace Scripts.Character.Player.Handlers
 
         private void Update()
         {
-            if (_gameState.CurrentState != GameStates.Playing) return;
+            if (_gameState.State != GameStates.Playing) return;
 
             SetAxes();
             CheckMoving();
@@ -59,7 +59,7 @@ namespace Scripts.Character.Player.Handlers
 
         private void FixedUpdate()
         {
-            if (_gameState.CurrentState != GameStates.Playing) return;
+            if (_gameState.State != GameStates.Playing) return;
 
             if (_isMoved)
             {

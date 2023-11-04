@@ -1,17 +1,17 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Scripts.Core.Global
 {
     public class GameState : MonoBehaviour
     {
-        public GameStates CurrentState { get; private set; }
         public static GameState instance;
+        public GameStates State { get => _state; set => _state = value; }
         
+        [SerializeField] private GameStates _state;
         [SerializeField] private GameObject _menuPanel;
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _levelPrefab;
-        
+
         private GameObject _currentLevel;
         
         void Start()
@@ -29,7 +29,7 @@ namespace Scripts.Core.Global
 
         private void ChangeMode()
         {
-            if (CurrentState == GameStates.Playing) Pause();
+            if (State == GameStates.Playing) Pause();
             else Play();
         }
 
@@ -38,7 +38,7 @@ namespace Scripts.Core.Global
             _pausePanel.SetActive(true);
             Time.timeScale = 0;
 
-            CurrentState = GameStates.Paused;
+            State = GameStates.Paused;
         }
 
         public void Play()
@@ -46,7 +46,7 @@ namespace Scripts.Core.Global
             _pausePanel.SetActive(false);
             Time.timeScale = 1;
         
-            CurrentState = GameStates.Playing;
+            State = GameStates.Playing;
         }
 
         public void LoadLevel()
@@ -64,6 +64,7 @@ namespace Scripts.Core.Global
             
             _currentLevel = null;
             _menuPanel.SetActive(true);
+            _pausePanel.SetActive(false);
         }
     }
 
