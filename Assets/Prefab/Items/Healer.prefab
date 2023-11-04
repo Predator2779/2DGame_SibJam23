@@ -191,7 +191,7 @@ MonoBehaviour:
   nameItem: Healer
   _destroyAfterUsing: 1
   _continuousExecution: 0
-  _passiveExecution: 0
+  _passiveExecution: 1
   _delayUsing: 0.1
   _disableComponent: 0
   healPoints: 100

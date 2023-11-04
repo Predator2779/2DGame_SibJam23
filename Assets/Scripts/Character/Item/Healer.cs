@@ -19,7 +19,7 @@ public class Healer : UsableItem
                 responsable.ResponseAction(gameObject);
 
         if (_destroyAfterUsing)
-            Destroy(gameObject);
+            DestroyItem();
 
         StartCoroutine(CanUse());
     }

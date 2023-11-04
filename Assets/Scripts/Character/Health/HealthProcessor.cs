@@ -4,17 +4,17 @@ using Scripts.Character.Classes;
 using Scripts.Core.Global;
 using UnityEngine;
 
-[RequireComponent(typeof(Character))]
 public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
 {
     [Header("Required Components")] [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
-    [Header("HealthBar")] 
+    [Header("HealthBar")]
     [SerializeField] private HealthBar _healthBar;
 
-    [Header("Parameters")] 
+    [Header("Parameters")]
     [SerializeField] private int _maxHitPoints;
+
     [SerializeField] private int _currentHitPoints;
     [SerializeField] [Min(1)] private float _coefDefense;
 
@@ -26,12 +26,12 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
     private void Initialize()
     {
         _character = GetComponent<Character>();
-        
+
         if (_spriteRenderer == null)
             _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
-        _health = new Health(_maxHitPoints, _coefDefense);
-        
+        _health = new Health(_maxHitPoints, _coefDefense, _currentHitPoints);
+
         ChangeHealthBar();
     }
 
@@ -70,11 +70,11 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
     public void ChangeHealthBar()
     {
         _currentHitPoints = _health.HitPoints;
-        
+
         if (_healthBar != null)
             _healthBar.SetCurrentHealth(_currentHitPoints * 100 / _maxHitPoints);
     }
-    
+
     private IEnumerator ChangeColor(Color color)
     {
         SetColor(color);

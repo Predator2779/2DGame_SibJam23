@@ -40,14 +40,19 @@ public class UsableItem : MonoBehaviour
             enabled = false;
 
         if (_destroyAfterUsing)
-        {
-            EventHandler.OnItemDestroy?.Invoke();
-            enabled = false;
-            transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        }
+            DestroyItem();
     }
 
-    public virtual void SecondaryAction() { }
+    protected void DestroyItem()
+    {
+        EventHandler.OnItemDestroy?.Invoke();
+        enabled = false;
+        transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
+    }
+
+    public virtual void SecondaryAction()
+    {
+    }
 
     public void PassiveAction()
     {
