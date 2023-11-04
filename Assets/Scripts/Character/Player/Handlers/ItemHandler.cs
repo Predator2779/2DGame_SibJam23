@@ -1,11 +1,13 @@
 using Scripts.Character.Classes;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour
 {
     [SerializeField] private Character _character;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
-
+    [SerializeField] private Image _itemIcon; 
+    
     private TransportableItem _selectedItem;
     private TransportableItem _holdedItem;
     private int _itemSortingOrder;
@@ -22,6 +24,7 @@ public class ItemHandler : MonoBehaviour
             _holdedItem = _selectedItem;
             _selectedItem = null;
 
+            SetIcon(_holdedItem);
             SetCharacterItem(_holdedItem);
 
             SetSpriteSortOrder();
@@ -40,12 +43,27 @@ public class ItemHandler : MonoBehaviour
             _holdedItem.Put();
             _holdedItem = null;
 
+            SetIcon(null);
             SetCharacterItem(null);
 
             IsHolded = false;
         }
     }
 
+    private void SetIcon(TransportableItem item)
+    {
+        if (item == null)
+        {
+            _itemIcon.sprite = null;
+            _itemIcon.gameObject.SetActive(false);
+            return;
+        }
+        
+        var icon = item.GetComponentInChildren<SpriteRenderer>().sprite;
+        _itemIcon.sprite = icon;
+        _itemIcon.gameObject.SetActive(true);
+    }
+    
     private void SetSpriteSortOrder()
     {
         var tempSprite = GetSpriteRenderer(_holdedItem.transform);
@@ -57,7 +75,7 @@ public class ItemHandler : MonoBehaviour
 
     private SpriteRenderer GetSpriteRenderer(Transform t) => t.GetChild(0).GetComponent<SpriteRenderer>();
 
-    private void SetCharacterItem(TransportableItem item) => _character.holdedItem = item;
+    private void SetCharacterItem(TransportableItem item) => _character.holdedItem = item;//
 
     public void SelectItem(TransportableItem item)
     {
@@ -66,8 +84,7 @@ public class ItemHandler : MonoBehaviour
 
     public void DeselectItem(TransportableItem item)
     {
-        if (!IsNewItem(item))
-            _selectedItem = null;
+        if (!IsNewItem(item)) _selectedItem = null;
     }
 
     private bool IsNewItem(TransportableItem item) => _selectedItem != item;

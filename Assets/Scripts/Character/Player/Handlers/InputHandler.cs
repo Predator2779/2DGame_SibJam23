@@ -80,7 +80,7 @@ namespace Scripts.Character.Player.Handlers
 
         private void CheckMoving()
         {
-            if (InputFunctions.GetSpace_Down() || _verticalAxis != 0 || _horizontalAxis != 0)
+            if (Input.GetKeyDown(KeyCode.Space) || _verticalAxis != 0 || _horizontalAxis != 0)
                 _isMoved = true;
             else _isMoved = false;
         }
@@ -93,11 +93,11 @@ namespace Scripts.Character.Player.Handlers
 
         private void CheckPlayerSide()
         {
-            if (_verticalAxis < 0)
-                SetPlayerSide(TurnHandler.playerSides.Front);
-
-            if (_verticalAxis > 0)
-                SetPlayerSide(TurnHandler.playerSides.Back);
+            // if (_verticalAxis < 0)
+            //     SetPlayerSide(TurnHandler.playerSides.Front);
+            //
+            // if (_verticalAxis > 0)
+            //     SetPlayerSide(TurnHandler.playerSides.Back);
 
             if (_horizontalAxis < 0)
                 SetPlayerSide(TurnHandler.playerSides.Left);
@@ -116,18 +116,17 @@ namespace Scripts.Character.Player.Handlers
         {
             // _verticalAxis = InputFunctions.GetVerticalAxis();
             _verticalAxis = 0;
-            _horizontalAxis = InputFunctions.GetHorizontalAxis();
+            _horizontalAxis = Input.GetAxis("Horizontal");
         }
 
         private void Jump()
         {
-            if (InputFunctions.GetSpace_Down())
-                _player.Jump();
+            if (Input.GetKeyDown(KeyCode.Space)) _player.Jump();
         }
 
         private void ItemPickOrPut()
         {
-            if (InputFunctions.GetKeyE_Up())
+            if (Input.GetKeyUp(KeyCode.E))
             {
                 if (_itemHandler.IsHolded) PutItem();
                 else PickUpItem();
@@ -149,14 +148,12 @@ namespace Scripts.Character.Player.Handlers
 
         private void UseItem_Primary()
         {
-            if (InputFunctions.GetLMB_Up())
-                _player.UsePrimaryAction();
+            if (Input.GetMouseButtonUp(0)) _player.UsePrimaryAction();
         }
 
         private void UseItem_Secondary()
         {
-            if (InputFunctions.GetRMB_Up())
-                _player.UseSecondaryAction();
+            if (Input.GetMouseButtonUp(1)) _player.UseSecondaryAction();
         }
 
         private Vector2 GetMovementVector()

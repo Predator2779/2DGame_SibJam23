@@ -6,10 +6,17 @@ public class TurnHandler : MonoBehaviour
 {
     [Header("Components:")]
     [SerializeField] private ItemHandler _itemHandler;
+
     [SerializeField] private Transform _playerSprite;
     [SerializeField] private Transform _playerTrigger;
 
-    public enum playerSides { Front, Back, Left, Right }
+    public enum playerSides
+    {
+        Front,
+        Back,
+        Left,
+        Right
+    }
 
     [Header("Player Side:")]
     public playerSides currentSide;
@@ -58,15 +65,11 @@ public class TurnHandler : MonoBehaviour
         if (_itemHandler.HoldedItem != null)
         {
             item = _itemHandler.HoldedItem.transform;
-
             return true;
         }
-        else
-        {
-            item = null;
 
-            return false;
-        }
+        item = null;
+        return false;
     }
 
     private void ItemLeftPos()

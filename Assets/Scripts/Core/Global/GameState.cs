@@ -24,7 +24,7 @@ namespace Scripts.Core.Global
 
         private void Update()
         {
-            if (InputFunctions.GetEscapeButton_Up()) ChangeMode();
+            if (Input.GetKeyUp(KeyCode.Escape)) ChangeMode();
         }
 
         private void ChangeMode()

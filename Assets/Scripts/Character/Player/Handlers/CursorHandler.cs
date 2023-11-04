@@ -19,7 +19,7 @@ namespace Scripts.Character.Player.Handlers
 
         private void SetPosition(Vector2 mousePos) => transform.position = new(mousePos.x, mousePos.y);
 
-        private Vector3 GetMousePosition() => _camera.ScreenToWorldPoint(InputFunctions.GetMousePosition());
+        private Vector3 GetMousePosition() => _camera.ScreenToWorldPoint(Input.mousePosition);
 
         #endregion
 
