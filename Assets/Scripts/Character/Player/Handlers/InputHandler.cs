@@ -138,7 +138,6 @@ namespace Scripts.Character.Player.Handlers
         private void PickUpItem()
         {
             _itemHandler.PickUpItem();
-
             SetPlayerSide(GetLastPlayerSide());
         }
 
@@ -148,12 +147,12 @@ namespace Scripts.Character.Player.Handlers
 
         private void UseItem_Primary()
         {
-            if (Input.GetMouseButtonUp(0)) _player.UsePrimaryAction();
+            if (Input.GetKeyUp(KeyCode.F)) _player.UsePrimaryAction();
         }
 
         private void UseItem_Secondary()
         {
-            if (Input.GetMouseButtonUp(1)) _player.UseSecondaryAction();
+            // if (Input.GetMouseButtonUp(1)) _player.UseSecondaryAction();
         }
 
         private Vector2 GetMovementVector()

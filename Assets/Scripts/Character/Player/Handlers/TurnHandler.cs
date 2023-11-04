@@ -40,22 +40,22 @@ public class TurnHandler : MonoBehaviour
             case playerSides.Back:
                 RotateObj(_playerSprite, 0);
                 ItemLeftPos();
-                _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosBack;
+                // _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosBack;
                 break;
             case playerSides.Left:
                 RotateObj(_playerSprite, 0);
                 ItemLeftPos();
-                _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosLeft;
+                // _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosLeft;
                 break;
             case playerSides.Right:
                 RotateObj(_playerSprite, 180f);
                 ItemRightPos();
-                _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosRight;
+                // _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosRight;
                 break;
             default:
                 RotateObj(_playerSprite, 0);
                 ItemRightPos();
-                _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosFront;
+                // _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosFront;
                 break;
         }
     }
