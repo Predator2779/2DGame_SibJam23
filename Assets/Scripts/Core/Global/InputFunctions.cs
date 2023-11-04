@@ -12,6 +12,11 @@ namespace Scripts.Core.Global
         static public float GetHorizontalAxis()
         {
             return Input.GetAxis(GlobalConstants.HorizontalAxis);
+        }      
+        
+        static public bool GetSpace_Down()
+        {
+            return Input.GetKeyDown(KeyCode.Space);
         }
 
         static public Vector2 GetMousePosition()

@@ -1,3 +1,4 @@
+using System;
 using Scripts.Core.Common;
 using Scripts.Core.Global;
 using UnityEngine;
@@ -8,14 +9,15 @@ namespace Scripts.Character.Classes
     public class Character : MonoBehaviour
     {
         [SerializeField] private bool _isPlayer;
-        [SerializeField][Range(0, 10)] private int _movementSpeed;
-
+        [SerializeField] [Range(0, 10)] private int _movementSpeed;
+        [SerializeField] private float _jumpForce;
+        
         public TransportableItem holdedItem;
 
         private Rigidbody2D _rbody;
 
         private void Awake() => _rbody = GetComponent<Rigidbody2D>();
-
+        
         #region Character
 
         public virtual void UsePrimaryAction()
@@ -35,17 +37,24 @@ namespace Scripts.Character.Classes
             )
                 usedItem.SecondaryAction();
         }
-
+        
         public void MoveTo(Vector2 movementDirection)
         {
             float speed = _movementSpeed * GlobalConstants.CoefMovementSpeed;
 
-            ExecuteCommand(new MoveCommand(_rbody, movementDirection * speed));
+            ExecuteCommand(new MoveCommand(_rbody, movementDirection, speed));
         }
-
+        
+        public void Jump()
+        {
+            ExecuteCommand(new JumpCommand(_rbody, 
+                    Vector2.up * _jumpForce, 
+                    ForceMode2D.Impulse));
+        }
+        
         public void StopMove()
         {
-            ExecuteCommand(new MoveCommand(_rbody, Vector2.zero * 0));
+            ExecuteCommand(new MoveCommand(_rbody, Vector2.zero, 0));
         }
 
         public void RotateByAngle(Transform obj, float angle)
@@ -58,7 +67,7 @@ namespace Scripts.Character.Classes
             if (_isPlayer)
             {
                 EventHandler.OnPlayerDeath?.Invoke();
-                
+
                 PlayerTransition.Transiting(transform, GlobalConstants.TavernInside);
             }
             else

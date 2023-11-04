@@ -18,8 +18,10 @@ namespace Scripts.Character.Player.Handlers
         private TurnHandler _turnHandler;
         private ItemHandler _itemHandler;
 
-        private float _verticalAxis = 0;
-        private float _horizontalAxis = 0;
+        [SerializeField] private bool _isMoved;
+
+        private float _verticalAxis;
+        [SerializeField] private float _horizontalAxis;
 
         #endregion
 
@@ -43,6 +45,8 @@ namespace Scripts.Character.Player.Handlers
             if (_gameState.CurrentState != GameStates.Playing) return;
 
             SetAxes();
+            CheckMoving();
+            Jump();
 
             ItemPickOrPut();
 
@@ -56,10 +60,9 @@ namespace Scripts.Character.Player.Handlers
 
         private void FixedUpdate()
         {
-            if (_gameState.CurrentState != GameStates.Playing)
-                return;
+            if (_gameState.CurrentState != GameStates.Playing) return;
 
-            if (IsPlayerMoving())
+            if (_isMoved)
             {
                 _player.MoveTo(GetMovementVector());
                 CheckPlayerSide();
@@ -76,7 +79,12 @@ namespace Scripts.Character.Player.Handlers
 
         #region Other
 
-        private bool IsPlayerMoving() => _verticalAxis != 0 || _horizontalAxis != 0;
+        private void CheckMoving()
+        {
+            if (InputFunctions.GetSpace_Down() || _verticalAxis != 0 || _horizontalAxis != 0)
+                _isMoved = true;
+            else _isMoved = false;
+        }
 
         #endregion
 
@@ -112,6 +120,12 @@ namespace Scripts.Character.Player.Handlers
             _horizontalAxis = InputFunctions.GetHorizontalAxis();
         }
 
+        private void Jump()
+        {
+            if (InputFunctions.GetSpace_Down())
+                _player.Jump();
+        }
+
         private void ItemPickOrPut()
         {
             if (InputFunctions.GetKeyE_Up())
@@ -133,13 +147,13 @@ namespace Scripts.Character.Player.Handlers
         private void PutItem() => _itemHandler.PutItem();
 
         #endregion
-        
+
         private void UseItem_Primary()
         {
             if (InputFunctions.GetLMB_Up())
                 _player.UsePrimaryAction();
         }
-        
+
         private void UseItem_Secondary()
         {
             if (InputFunctions.GetRMB_Up())
