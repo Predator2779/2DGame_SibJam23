@@ -9,7 +9,7 @@ public class PlayerAudioHandler : MonoBehaviour
 
     private void Start() => audioSource = GetComponent<AudioSource>();
 
-        public void TakeStep()
+    public void TakeStep()
     {
         int value = Random.Range(0, aClips.Length);
 
@@ -18,7 +18,7 @@ public class PlayerAudioHandler : MonoBehaviour
             audioSource.clip = aClips[value];
             audioSource.PlayDelayed(_stepDelay);
         }
-        }
+    }
 
     public void StopPlaying()
     {

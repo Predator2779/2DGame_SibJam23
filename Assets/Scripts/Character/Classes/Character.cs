@@ -1,6 +1,6 @@
-using System;
 using Scripts.Core.Common;
 using Scripts.Core.Global;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Scripts.Character.Classes
@@ -11,13 +11,14 @@ namespace Scripts.Character.Classes
         [SerializeField] private bool _isPlayer;
         [SerializeField] [Range(0, 10)] private int _movementSpeed;
         [SerializeField] private float _jumpForce;
+        [SerializeField] private TransportableItem _loot;
         
         public TransportableItem holdedItem;
 
         private Rigidbody2D _rbody;
 
         private void Awake() => _rbody = GetComponent<Rigidbody2D>();
-        
+
         #region Character
 
         public virtual void UsePrimaryAction()
@@ -37,21 +38,21 @@ namespace Scripts.Character.Classes
             )
                 usedItem.SecondaryAction();
         }
-        
+
         public void MoveTo(Vector2 movementDirection)
         {
             float speed = _movementSpeed * GlobalConstants.CoefMovementSpeed;
 
             ExecuteCommand(new MoveCommand(_rbody, movementDirection, speed));
         }
-        
+
         public void Jump()
         {
-            ExecuteCommand(new JumpCommand(_rbody, 
-                    Vector2.up * _jumpForce, 
+            ExecuteCommand(new JumpCommand(_rbody,
+                    Vector2.up * _jumpForce,
                     ForceMode2D.Impulse));
         }
-        
+
         public void StopMove()
         {
             ExecuteCommand(new MoveCommand(_rbody, Vector2.zero, 0));
@@ -64,18 +65,16 @@ namespace Scripts.Character.Classes
 
         public void Death()
         {
-            if (_isPlayer)
+            if (!_isPlayer)
             {
-                EventHandler.OnPlayerDeath?.Invoke();
-
-                PlayerTransition.Transiting(transform, GlobalConstants.TavernInside);
-            }
-            else
-            {
+                Vector2 pos = new Vector2(transform.position.x, -transform.localScale.y / 2);
+                Instantiate(_loot, pos, quaternion.identity);
                 EventHandler.OnEnemyKilled?.Invoke();
-
                 Destroy(gameObject);
+                return;
             }
+
+            EventHandler.OnPlayerDeath?.Invoke();
         }
 
         #endregion

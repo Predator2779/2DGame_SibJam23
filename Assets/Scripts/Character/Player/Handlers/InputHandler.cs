@@ -18,10 +18,9 @@ namespace Scripts.Character.Player.Handlers
         private TurnHandler _turnHandler;
         private ItemHandler _itemHandler;
 
-        [SerializeField] private bool _isMoved;
-
+        private bool _isMoved;
         private float _verticalAxis;
-        [SerializeField] private float _horizontalAxis;
+        private float _horizontalAxis;
 
         #endregion
 

@@ -4,6 +4,7 @@ using Scripts.Character.Classes;
 using Scripts.Core.Global;
 using UnityEngine;
 
+[RequireComponent(typeof(Character))]
 public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
 {
     [Header("Required Components")] [SerializeField]
@@ -17,12 +18,15 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
     [SerializeField] private int _currentHitPoints;
     [SerializeField] [Min(1)] private float _coefDefense;
 
+    private Character _character;
     private Health _health;
 
     private void Start() => Initialize();
 
     private void Initialize()
     {
+        _character = GetComponent<Character>();
+        
         if (_spriteRenderer == null)
             _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
@@ -86,7 +90,6 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
 
     private void CheckDeath()
     {
-        if (_currentHitPoints <= 0 && transform.TryGetComponent(out Character character))
-            character.Death();
+        if (_currentHitPoints <= 0) _character.Death();
     }
 }
