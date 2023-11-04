@@ -15,8 +15,8 @@ public class Healer : UsableItem
         HealingCaster();
 
         if (_responseItems != null)
-            foreach (var usable in _responseItems)
-                usable.ResponseAction(gameObject);
+            foreach (var responsable in _responseItems)
+                responsable.ResponseAction(gameObject);
 
         if (_destroyAfterUsing)
             Destroy(gameObject);
@@ -46,8 +46,8 @@ public class Healer : UsableItem
     {
         if (
            transform.parent != null &&
-           transform.parent.transform.TryGetComponent(out HealthProcessor healthProcessor)
+           transform.parent.transform.TryGetComponent(out IResponsable responsable)
            ) 
-            healthProcessor.ResponseAction(gameObject);
+            responsable.ResponseAction(gameObject);
     }
 }

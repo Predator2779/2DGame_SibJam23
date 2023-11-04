@@ -71,7 +71,11 @@ public class UsableItem : MonoBehaviour
             _responseItems.Remove(usable);
     }
 
-    private void OnTriggerStay2D(Collider2D collision) => AddToList(collision);
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        AddToList(collision);
+        PassiveAction();
+    }
 
     private void OnTriggerExit2D(Collider2D collision) => RemoveFromList(collision);
 }
