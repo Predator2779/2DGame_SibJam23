@@ -6,13 +6,14 @@ namespace Scripts.Character.Classes
     {
         public Weapon weapon;
         [Min(1)] public int attackDamage;
-
+        [SerializeField] private HealthTrigger _healthTrigger;
+        
         public void Attack()
         {
             if (weapon != null)
             {
                 MultiplyDamage(weapon);
-                weapon.PrimaryAction();
+                weapon.TakeDamage(_healthTrigger._healthProcessors);
             }
         }
 

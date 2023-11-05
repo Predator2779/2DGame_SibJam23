@@ -4,8 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Warrior))]
 public class WarriorAI : CharacterAI
 {
-    [SerializeField] private Transform _enemy;
-
+    private Transform _enemy;
     protected Warrior _warrior;
 
     protected override void Awake() => _warrior = GetComponent<Warrior>();

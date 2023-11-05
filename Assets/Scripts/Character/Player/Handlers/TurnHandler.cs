@@ -1,13 +1,15 @@
+using Scripts.Core.Global;
 using UnityEngine;
 
 public class TurnHandler : MonoBehaviour
 {
-    [SerializeField] private ItemHandler _itemHandler;
+    [SerializeField] private Collider2D _weaponTrigger;
     [SerializeField] private Transform _playerSprite;
-    [SerializeField] private Transform _playerTrigger;
 
     public enum playerSides
     {
+        // Front,
+        // Back,
         Left,
         Right
     }
@@ -19,7 +21,6 @@ public class TurnHandler : MonoBehaviour
     private void Start()
     {
         _player = GetComponent<Scripts.Character.Classes.Person>();
-        _itemHandler = GetComponent<ItemHandler>();
 
         SetPlayerSide(playerSides.Right);
     }
@@ -32,9 +33,11 @@ public class TurnHandler : MonoBehaviour
         {
             case playerSides.Left:
                 RotateObj(_playerSprite, 0);
+                SetWeaponPosition(GlobalConstants.PlayerTriggerPosLeft);
                 break;
-            case playerSides.Right:
+            default:
                 RotateObj(_playerSprite, 180f);
+                SetWeaponPosition(GlobalConstants.PlayerTriggerPosRight);
                 break;
         }
     }
@@ -47,56 +50,27 @@ public class TurnHandler : MonoBehaviour
     //     {
     //         case playerSides.Back:
     //             RotateObj(_playerSprite, 0);
-    //             ItemLeftPos();
+    //             SetWeaponPosition(GlobalConstants.WeaponPositionLeft);
     //             _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosBack;
     //             break;
     //         case playerSides.Left:
     //             RotateObj(_playerSprite, 0);
-    //             ItemLeftPos();
+    //             SetWeaponPosition(GlobalConstants.WeaponPositionLeft);
     //             _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosLeft;
     //             break;
     //         case playerSides.Right:
     //             RotateObj(_playerSprite, 180f);
-    //             ItemRightPos();
+    //             SetWeaponPosition(GlobalConstants.WeaponPositionRight);
     //             _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosRight;
     //             break;
     //         default:
     //             RotateObj(_playerSprite, 0);
-    //             ItemRightPos();
+    //             SetWeaponPosition(GlobalConstants.WeaponPositionRight);
     //             _playerTrigger.localPosition = GlobalConstants.PlayerTriggerPosFront;
     //             break;
     //     }
     // }
 
-    // private void ItemLeftPos()
-    // {
-    //     if (CheckExistingItem(out Transform item))
-    //     {
-    //         RotateObj(item.transform, 0);
-    //         item.transform.localPosition = GlobalConstants.ItemPositionLeft;
-    //     }
-    // }
-    //
-    // private void ItemRightPos()
-    // {
-    //     if (CheckExistingItem(out Transform item))
-    //     {
-    //         RotateObj(item.transform, 180f);
-    //         item.transform.localPosition = GlobalConstants.ItemPositionRight;
-    //     }
-    // }
-    //
-    // private bool CheckExistingItem(out Transform item)
-    // {
-    //     if (_itemHandler.HoldedItem != null)
-    //     {
-    //         item = _itemHandler.HoldedItem.transform;
-    //         return true;
-    //     }
-    //
-    //     item = null;
-    //     return false;
-    // }
-    
+    private void SetWeaponPosition(Vector2 position) => _weaponTrigger.transform.localPosition = position;
     private void RotateObj(Transform obj, float angle) => _player.RotateByAngle(obj, angle);
 }
