@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3080264289964520471}
   - component: {fileID: 6730694768279578637}
   - component: {fileID: 8245413034639807086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2240475024909188602}
   - component: {fileID: 171020570849857862}
   - component: {fileID: 3989592380285959517}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8851128978254192218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PLAYER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 3717493483439982042}
   - component: {fileID: 6173978385421842903}
   - component: {fileID: 7537362246387545115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TearProcessor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477595489127292854}
   - component: {fileID: 8128396561748264087}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ItemTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 3059687081627002377}
   - component: {fileID: 7127553890773838878}
   - component: {fileID: 748548339869717780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite&Anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 5548799455289867061}
   - component: {fileID: 1347075930641569014}
   - component: {fileID: 4342944221287403308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 7166789133327428947}
   - component: {fileID: 1118307862297502902}
   - component: {fileID: 3358423409453564473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

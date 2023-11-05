@@ -1,32 +1,41 @@
 ﻿using System;
+using Character.Item;
 using Scripts.Character.Classes;
 using UnityEngine;
 
-[RequireComponent(typeof(Warrior))]
+[RequireComponent(typeof(Boss))]
 public class BossAI : CharacterAI
 {
     [SerializeField] private Trigger meleeTrigger;
     [SerializeField] private float meleeDuration;
     [SerializeField] private float meleeCooldown;
+    [SerializeField] private Trigger rangedTrigger;
+    [SerializeField] private float rangedDuration;
+    [SerializeField] private float rangedCooldown;
 
     private float _meleeTimestamp = float.MinValue;
-    private bool _isInMeleeRange = false;
+    private bool _isInMeleeRange;
+
+    private float _rangedTimestamp = float.MinValue;
+    private bool _isInRange;
 
     private BossAIState _state = BossAIState.Armed;
     private float _stateTimestamp = 0f;
 
-    private Warrior _boss;
+    private Boss _boss;
     private Transform _enemy;
+
+    private ThrownWeapon _thrownWeapon;
 
     protected override void Awake()
     {
-        _boss = GetComponent<Warrior>();
-        
+        _boss = GetComponent<Boss>();
+        _enemy = GameObject.FindGameObjectWithTag("Player").transform;
+
         meleeTrigger._triggerEnterCallback = (_, c) =>
         {
             if (c.CompareTag("Player"))
             {
-                _enemy = c.transform;
                 _isInMeleeRange = true;
             }
         };
@@ -34,14 +43,29 @@ public class BossAI : CharacterAI
         {
             if (c.CompareTag("Player"))
             {
-                _enemy = null;
                 _isInMeleeRange = false;
+            }
+        };
+
+        rangedTrigger._triggerEnterCallback = (_, c) =>
+        {
+            if (c.CompareTag("Player"))
+            {
+                _isInRange = true;
+            }
+        };
+        rangedTrigger._triggerExitCallback = (_, c) =>
+        {
+            if (c.CompareTag("Player"))
+            {
+                _isInRange = false;
             }
         };
     }
 
     protected override void Update()
     {
+        Debug.Log(Time.time + " " + _state);
         switch (_state)
         {
             case BossAIState.Idle:
@@ -52,17 +76,36 @@ public class BossAI : CharacterAI
                 Vector2 moveDirection = GetMoveDirection();
 
                 _boss.MoveTo(moveDirection);
-                CheckSpriteSide(moveDirection);
-                
+                CheckSpriteSide();
+
+                if (_boss.heldWeapon.gameObject.activeSelf && _isInRange &&
+                    Time.time - _rangedTimestamp > rangedDuration + rangedCooldown)
+                {
+                    _thrownWeapon = _boss.RangedAttack();
+                    _state = BossAIState.RangedAttack;
+                    _rangedTimestamp = Time.time;
+                }
+
                 if (_isInMeleeRange && Time.time - _meleeTimestamp > meleeDuration + meleeCooldown)
                 {
-                    _boss.Attack();
+                    _boss.MeleeAttack();
                     _state = BossAIState.MeleeAttack;
                     _meleeTimestamp = Time.time;
                 }
 
                 break;
             case BossAIState.Disarmed:
+                if (_thrownWeapon != null)
+                {
+                    var direction = (_thrownWeapon.transform.position.x - transform.position.x);
+                    _boss.MoveTo((direction * Vector2.right).normalized);
+                    _boss.SetSpriteSide(direction > 0 ? TurnHandler.playerSides.Left : TurnHandler.playerSides.Right);
+                }
+                else
+                {
+                    _state = BossAIState.Armed;
+                }
+
                 break;
             case BossAIState.MeleeAttack:
                 if (Time.time - _meleeTimestamp > meleeDuration)
@@ -72,6 +115,11 @@ public class BossAI : CharacterAI
 
                 break;
             case BossAIState.RangedAttack:
+                if (Time.time - _rangedTimestamp > rangedDuration)
+                {
+                    _state = BossAIState.Disarmed;
+                }
+
                 break;
             case BossAIState.AoeAttack:
                 break;
@@ -82,23 +130,40 @@ public class BossAI : CharacterAI
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (_state == BossAIState.Disarmed && _thrownWeapon != null && col.gameObject == _thrownWeapon.gameObject)
+        {
+            Destroy(_thrownWeapon.gameObject);
+            _thrownWeapon = null;
+
+            _boss.heldWeapon.gameObject.SetActive(true);
+        }
+    }
+
     public void Activate()
     {
         if (_state == BossAIState.Idle)
         {
-            _state = _boss.currentWeapon != null ? BossAIState.Armed : BossAIState.Disarmed;
+            _state = _boss.heldWeapon.gameObject.activeSelf ? BossAIState.Armed : BossAIState.Disarmed;
         }
     }
 
-    private Vector2 GetMoveDirection() => (Vector2.right * (_enemy.position.x - meleeTrigger.transform.position.x)).normalized;
-    
-    private void CheckSpriteSide(Vector2 direction)
+    private Vector2 GetMoveDirection()
     {
-        if (direction.x < 0) _boss.SetSpriteSide(TurnHandler.playerSides.Left);
-
-        if (direction.x > 0) _boss.SetSpriteSide(TurnHandler.playerSides.Right);
+        var target = (rangedDuration + rangedCooldown) - (Time.time - _rangedTimestamp) < 2
+            ? rangedTrigger.transform.position.x
+            : meleeTrigger.transform.position.x;
+        return (Vector2.right * (_enemy.position.x - target)).normalized;
     }
-    
+
+    private void CheckSpriteSide()
+    {
+        _boss.SetSpriteSide(_enemy.transform.position.x > transform.position.x
+            ? TurnHandler.playerSides.Left
+            : TurnHandler.playerSides.Right);
+    }
+
     private enum BossAIState
     {
         Idle,

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private int _damage;
-    [SerializeField] private bool _destroyAfterUsing;
+    [SerializeField] protected bool _destroyAfterUsing;
     [SerializeField] private float _delayUsing = 0.1f;
 
     public bool _undamagedWeapon;
@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
 
     public int DamageFactor { set => _damageFactor = value; }
     
-    private void Start() => _canUse = true;
+    protected virtual void Start() => _canUse = true;
 
     public void TakeDamage(List<HealthProcessor> healthProcessors)
     {
