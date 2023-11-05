@@ -1,3 +1,4 @@
+using System;
 using Character.Item;
 using Scripts.Core.Common;
 using Scripts.Core.Global;
@@ -9,21 +10,20 @@ namespace Scripts.Character.Classes
     [RequireComponent(typeof(Rigidbody2D))]
     public class Person : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer _spriteRend;
         [SerializeField] private bool _isPlayer;
         [SerializeField] [Range(0, 10)] private int _movementSpeed;
         [SerializeField] private float _jumpForce;
         [SerializeField] private Loot _loot;
-
-        private SpriteRenderer _spriteRend;
         private TurnHandler _turnHandler;
 
-        public UsableItem item;
+        [NonSerialized] public UsableItem item;
         private Rigidbody2D _rbody;
 
         private void Awake()
         {
+            _spriteRend ??= GetComponentInChildren<SpriteRenderer>();
             _rbody = GetComponent<Rigidbody2D>();
-            _spriteRend = GetComponentInChildren<SpriteRenderer>();
             _turnHandler = new TurnHandler();
         }
 
@@ -43,8 +43,16 @@ namespace Scripts.Character.Classes
             _turnHandler.SetCharacterSprite(side, _spriteRend.transform);
         }
 
+        private void CheckSpriteSide(Vector2 direction)
+        {
+            if (direction.x < 0) SetSpriteSide(TurnHandler.playerSides.Left);
+            if (direction.x > 0) SetSpriteSide(TurnHandler.playerSides.Right);
+        }
+        
         public void MoveTo(Vector2 movementDirection)
         {
+            CheckSpriteSide(movementDirection);
+            
             float speed = _movementSpeed * GlobalConstants.CoefMovementSpeed;
 
             ExecuteCommand(new MoveCommand(_rbody, movementDirection, speed));

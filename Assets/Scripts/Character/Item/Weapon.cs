@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Weapon : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected bool _destroyAfterUsing;
     [SerializeField] private float _delayUsing = 0.1f;
 
-    public bool _undamagedWeapon;
+    [FormerlySerializedAs("_undamagedWeapon")] public bool undamagedWeapon;
     public int Damage => _damage * _damageFactor;
     private int _damageFactor = 1;
     private bool _canUse = true;
@@ -19,7 +20,7 @@ public class Weapon : MonoBehaviour
 
     public void TakeDamage(List<HealthProcessor> healthProcessors)
     {
-        if (!_canUse || !enabled || _undamagedWeapon) return;
+        if (!_canUse || !enabled || undamagedWeapon) return;
 
         foreach (var responsable in healthProcessors)
             responsable.ResponseAction(gameObject);
