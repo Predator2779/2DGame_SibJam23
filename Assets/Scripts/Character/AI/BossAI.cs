@@ -52,7 +52,6 @@ public class BossAI : CharacterAI
                 Vector2 moveDirection = GetMoveDirection();
 
                 _boss.MoveTo(moveDirection);
-                CheckSpriteSide(moveDirection);
                 
                 if (_isInMeleeRange && Time.time - _meleeTimestamp > meleeDuration + meleeCooldown)
                 {
@@ -91,13 +90,6 @@ public class BossAI : CharacterAI
     }
 
     private Vector2 GetMoveDirection() => (Vector2.right * (_enemy.position.x - meleeTrigger.transform.position.x)).normalized;
-    
-    private void CheckSpriteSide(Vector2 direction)
-    {
-        if (direction.x < 0) _boss.SetSpriteSide(TurnHandler.playerSides.Left);
-
-        if (direction.x > 0) _boss.SetSpriteSide(TurnHandler.playerSides.Right);
-    }
     
     private enum BossAIState
     {

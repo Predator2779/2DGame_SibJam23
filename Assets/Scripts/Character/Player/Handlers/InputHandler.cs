@@ -54,7 +54,6 @@ namespace Scripts.Character.Player.Handlers
             if (_isMoved)
             {
                 _player.MoveTo(GetMovementVector());
-                CheckPlayerSide();
                 _audioHandler.TakeStep();
             }
             else
@@ -79,15 +78,6 @@ namespace Scripts.Character.Player.Handlers
             Vector2 vector = h + v;
 
             return vector;
-        }
-        
-        private void CheckPlayerSide()
-        {
-            if (_horizontalAxis < 0)
-                _player.SetSpriteSide(TurnHandler.playerSides.Left);
-
-            if (_horizontalAxis > 0)
-                _player.SetSpriteSide(TurnHandler.playerSides.Right);
         }
 
         private void SetAxes()
