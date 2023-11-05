@@ -1,12 +1,12 @@
 using Scripts.Character.Classes;
 using UnityEngine;
 
-[RequireComponent(typeof(Character))]
+[RequireComponent(typeof(Scripts.Character.Classes.Character))]
 public class CharacterAI : MonoBehaviour
 {
-    protected Character _character;
+    protected Scripts.Character.Classes.Character _character;
 
-    protected virtual void Awake() => _character = GetComponent<Character>();
+    protected virtual void Awake() => _character = GetComponent<Scripts.Character.Classes.Character>();
 
     protected virtual void Update()
     {

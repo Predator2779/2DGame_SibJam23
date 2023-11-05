@@ -18,14 +18,14 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
     [SerializeField] private int _currentHitPoints;
     [SerializeField] [Min(1)] private float _coefDefense;
 
-    private Character _character;
+    private Scripts.Character.Classes.Character _character;
     private Health _health;
 
     private void Start() => Initialize();
 
     private void Initialize()
     {
-        _character = GetComponent<Character>();
+        _character = GetComponent<Scripts.Character.Classes.Character>();
 
         if (_spriteRenderer == null)
             _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -35,7 +35,7 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
         ChangeHealthBar();
     }
 
-    public void ResponseAction(GameObject g)
+    public virtual void ResponseAction(GameObject g)
     {
         if (g.TryGetComponent(out Weapon weapon))
             TakeDamage(weapon.Damage);

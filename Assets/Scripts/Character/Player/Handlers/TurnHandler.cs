@@ -1,4 +1,3 @@
-using Scripts.Character.Classes;
 using Scripts.Core.Global;
 using UnityEngine;
 
@@ -21,11 +20,11 @@ public class TurnHandler : MonoBehaviour
     [Header("Player Side:")]
     public playerSides currentSide;
 
-    private Character _player;
+    private Scripts.Character.Classes.Character _player;
 
     private void Start()
     {
-        _player = GetComponent<Character>();
+        _player = GetComponent<Scripts.Character.Classes.Character>();
         _itemHandler = GetComponent<ItemHandler>();
 
         SetPlayerSide(playerSides.Front);

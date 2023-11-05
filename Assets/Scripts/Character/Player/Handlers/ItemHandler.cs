@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour
 {
-    [SerializeField] private Character _character;
+    [SerializeField] private Scripts.Character.Classes.Character _character;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
     [SerializeField] private Image _iconUI;
 
