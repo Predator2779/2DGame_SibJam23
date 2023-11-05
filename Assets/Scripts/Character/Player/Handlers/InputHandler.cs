@@ -42,9 +42,9 @@ namespace Scripts.Character.Player.Handlers
             UseItem();
             UseWeapon();
 
-            _anim.SetFloat("SpeedHorizontal", Mathf.Abs(GetMovementVector().x));
-            _anim.SetFloat("SpeedUp", GetMovementVector().y);
-            _anim.SetFloat("SpeedDown", -GetMovementVector().y);
+            // _anim.SetFloat("SpeedHorizontal", Mathf.Abs(GetMovementVector().x));
+            // _anim.SetFloat("SpeedUp", GetMovementVector().y);
+            // _anim.SetFloat("SpeedDown", -GetMovementVector().y);
         }
 
         private void FixedUpdate()
