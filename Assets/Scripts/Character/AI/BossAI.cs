@@ -8,7 +8,7 @@ public class BossAI : CharacterAI
     [SerializeField] private Trigger meleeTrigger;
     [SerializeField] private float meleeDuration;
     [SerializeField] private float meleeCooldown;
-    
+
     private float _meleeTimestamp = float.MinValue;
     private bool _isInMeleeRange = false;
 
@@ -17,11 +17,11 @@ public class BossAI : CharacterAI
 
     private Warrior _boss;
     private Transform _enemy;
-    
+
     protected override void Awake()
     {
         _boss = GetComponent<Warrior>();
-
+        
         meleeTrigger._triggerEnterCallback = (_, c) =>
         {
             if (c.CompareTag("Player"))
@@ -48,9 +48,12 @@ public class BossAI : CharacterAI
                 break;
             case BossAIState.Armed:
                 if (_enemy == null) return;
-                
-                _boss.MoveTo((Vector2.right * (_enemy.position.x - meleeTrigger.transform.position.x)).normalized);
 
+                Vector2 moveDirection = GetMoveDirection();
+
+                _boss.MoveTo(moveDirection);
+                CheckSpriteSide(moveDirection);
+                
                 if (_isInMeleeRange && Time.time - _meleeTimestamp > meleeDuration + meleeCooldown)
                 {
                     _boss.Attack();
@@ -66,6 +69,7 @@ public class BossAI : CharacterAI
                 {
                     _state = BossAIState.Armed;
                 }
+
                 break;
             case BossAIState.RangedAttack:
                 break;
@@ -86,6 +90,15 @@ public class BossAI : CharacterAI
         }
     }
 
+    private Vector2 GetMoveDirection() => (Vector2.right * (_enemy.position.x - meleeTrigger.transform.position.x)).normalized;
+    
+    private void CheckSpriteSide(Vector2 direction)
+    {
+        if (direction.x < 0) _boss.SetSpriteSide(TurnHandler.playerSides.Left);
+
+        if (direction.x > 0) _boss.SetSpriteSide(TurnHandler.playerSides.Right);
+    }
+    
     private enum BossAIState
     {
         Idle,

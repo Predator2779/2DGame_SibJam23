@@ -724,7 +724,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0.2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1410670873}
   m_Father: {fileID: 702961007}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &505447261
@@ -808,17 +809,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702961006}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 101.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 505447260}
   - {fileID: 1489103099}
-  - {fileID: 1410670873}
   - {fileID: 119023599}
   m_Father: {fileID: 1142429278}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &702961009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ MonoBehaviour:
   item: {fileID: 0}
   currentWeapon: {fileID: 1410670876}
   attackDamage: 1
-  _healthTrigger: {fileID: 1410670874}
+  weaponTrigger: {fileID: 1410670874}
   _weaponIndex: 0
   _weapons: []
 --- !u!114 &702961010
@@ -1476,13 +1476,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410670872}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.9, y: 0.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: -5.950001, y: -4.8, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 194481366}
-  m_Father: {fileID: 702961007}
+  m_Father: {fileID: 505447260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1410670874
 MonoBehaviour:
@@ -1842,12 +1842,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725897253}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7193457750830306195}
+  m_Father: {fileID: 2440917129684788702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1725897255
 BoxCollider2D:
@@ -1881,7 +1881,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -12, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2284,7 +2284,6 @@ GameObject:
   - component: {fileID: 4527205628809387398}
   - component: {fileID: 8933475632053708638}
   - component: {fileID: 2990308400910237233}
-  - component: {fileID: 7864085275656361625}
   - component: {fileID: 8933475632053708639}
   - component: {fileID: 8933475632053708640}
   m_Layer: 0
@@ -3176,7 +3175,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1725897254}
   m_Father: {fileID: 7193457750830306195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &2493944555364560271
@@ -3277,7 +3277,7 @@ MonoBehaviour:
   item: {fileID: 0}
   currentWeapon: {fileID: 0}
   attackDamage: 1
-  _healthTrigger: {fileID: 8375291750726035418}
+  weaponTrigger: {fileID: 0}
   _weaponIndex: 0
   _weapons: []
 --- !u!20 &2787264654894743087
@@ -4425,7 +4425,7 @@ MonoBehaviour:
   item: {fileID: 0}
   currentWeapon: {fileID: 8521307334991409512, guid: ad16f378472929c41aa77fc3e59f2ce6, type: 3}
   attackDamage: 1
-  _healthTrigger: {fileID: 1725897256}
+  weaponTrigger: {fileID: 0}
   _weaponIndex: 0
   _weapons:
   - {fileID: 8521307334991409512, guid: ad16f378472929c41aa77fc3e59f2ce6, type: 3}
@@ -5043,7 +5043,6 @@ Transform:
   - {fileID: 2440917129684788702}
   - {fileID: 3051783943775012033}
   - {fileID: 2280869246575734646}
-  - {fileID: 1725897254}
   m_Father: {fileID: 4233006061235893054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!223 &7251251016210194085
@@ -5502,21 +5501,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6899356409517239504}
   m_CullTransparentMesh: 1
---- !u!114 &7864085275656361625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221398596877522316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f5c011994f665c4cbfb1afe40bc9e08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponTrigger: {fileID: 1725897255}
-  _playerSprite: {fileID: 2440917129684788702}
-  currentSide: 1
 --- !u!1 &7882003176775088263
 GameObject:
   m_ObjectHideFlags: 0

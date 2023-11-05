@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,8 @@ namespace Scripts.Character.Classes
     {
         public Weapon currentWeapon;
         [Min(1)] public int attackDamage;
-        [SerializeField] private HealthTrigger _healthTrigger;
+        public WeaponTrigger weaponTrigger;
+        
         [SerializeField] private int _weaponIndex;
         [SerializeField] private List<Weapon> _weapons = new();
 
@@ -17,7 +17,7 @@ namespace Scripts.Character.Classes
             if (currentWeapon != null)
             {
                 MultiplyDamage(currentWeapon);
-                currentWeapon.TakeDamage(_healthTrigger._healthProcessors);
+                currentWeapon.TakeDamage(weaponTrigger._healthProcessors);
             }
         }
 

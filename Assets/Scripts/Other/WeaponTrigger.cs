@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthTrigger : MonoBehaviour
+public class WeaponTrigger : MonoBehaviour
 {
     public List<HealthProcessor> _healthProcessors = new();
 

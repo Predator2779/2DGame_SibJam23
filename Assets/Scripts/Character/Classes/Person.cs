@@ -13,17 +13,34 @@ namespace Scripts.Character.Classes
         [SerializeField] [Range(0, 10)] private int _movementSpeed;
         [SerializeField] private float _jumpForce;
         [SerializeField] private Loot _loot;
-        
+
+        private SpriteRenderer _spriteRend;
+        private TurnHandler _turnHandler;
+
         public UsableItem item;
         private Rigidbody2D _rbody;
 
-        private void Awake() => _rbody = GetComponent<Rigidbody2D>();
+        private void Awake()
+        {
+            _rbody = GetComponent<Rigidbody2D>();
+            _spriteRend = GetComponentInChildren<SpriteRenderer>();
+            _turnHandler = new TurnHandler();
+        }
 
         #region Character
 
         public void UseItem()
         {
             if (item != null) item.PrimaryAction();
+        }
+
+        private TurnHandler.playerSides GetCurrentSide() => _turnHandler.currentSide;
+
+        public void SetSpriteSide(TurnHandler.playerSides side)
+        {
+            if (GetCurrentSide() == side) return;
+
+            _turnHandler.SetCharacterSprite(side, _spriteRend.transform);
         }
 
         public void MoveTo(Vector2 movementDirection)

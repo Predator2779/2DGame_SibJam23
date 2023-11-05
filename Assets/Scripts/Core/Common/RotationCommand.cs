@@ -4,17 +4,11 @@ namespace Scripts.Core.Common
 {
     public class RotationCommand : Command
     {
-        public RotationCommand(Transform rotatableObj)
-        {
-            _rotatableObj = rotatableObj;
-        }
+        public RotationCommand(Transform rotatableObj) { _rotatableObj = rotatableObj; }
 
         private Transform _rotatableObj;
 
-        public override void Execute()
-        {
-
-        }
+        public override void Execute() { }
 
         public override void ExecuteByValue(float angle)
         {

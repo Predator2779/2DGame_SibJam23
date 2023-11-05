@@ -11,7 +11,6 @@ namespace Scripts.Character.Player.Handlers
         [SerializeField] private PlayerAudioHandler _audioHandler;
 
         private Person _player;
-        private TurnHandler _turnHandler;
         private PickItem _pickItem;
 
         private bool _isMoved;
@@ -23,10 +22,9 @@ namespace Scripts.Character.Player.Handlers
             if (_gameState == null) _gameState = FindObjectOfType<GameState>();
         }
 
-        private void Start()
+        private void Awake()
         {
             _player = GetComponent<Person>();
-            _turnHandler = GetComponent<TurnHandler>();
             _pickItem = GetComponent<PickItem>();
         }
 
@@ -82,36 +80,25 @@ namespace Scripts.Character.Player.Handlers
 
             return vector;
         }
-
-        private TurnHandler.playerSides GetLastPlayerSide() => _turnHandler.currentSide;
-
+        
         private void CheckPlayerSide()
         {
-            // if (_verticalAxis < 0)
-            //     SetPlayerSide(TurnHandler.playerSides.Front);
-            //
-            // if (_verticalAxis > 0)
-            //     SetPlayerSide(TurnHandler.playerSides.Back);
-
             if (_horizontalAxis < 0)
-                SetPlayerSide(TurnHandler.playerSides.Left);
+                _player.SetSpriteSide(TurnHandler.playerSides.Left);
 
             if (_horizontalAxis > 0)
-                SetPlayerSide(TurnHandler.playerSides.Right);
+                _player.SetSpriteSide(TurnHandler.playerSides.Right);
         }
-
-        private void SetPlayerSide(TurnHandler.playerSides side) => _turnHandler.SetPlayerSide(side);
 
         private void SetAxes()
         {
-            // _verticalAxis = InputFunctions.GetVerticalAxis();
             _verticalAxis = 0;
             _horizontalAxis = Input.GetAxis("Horizontal");
         }
 
         private void Jump()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) _player.Jump();
+            if (Input.GetKeyDown(KeyCode.W)) _player.Jump();
         }
 
         private void CheckPress_E()
@@ -123,7 +110,7 @@ namespace Scripts.Character.Player.Handlers
         {
             if (Input.GetKeyUp(KeyCode.C)) _pickItem.Pressed_C();
         }
-        
+
         private void UseItem()
         {
             if (Input.GetKeyUp(KeyCode.F)) _player.UseItem();
