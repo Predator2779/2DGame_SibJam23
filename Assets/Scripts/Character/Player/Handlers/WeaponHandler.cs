@@ -11,50 +11,37 @@ public class WeaponHandler : MonoBehaviour
     private Weapon _holdedWeapon;
     private Sprite _currentWeaponIcon;
     private int _itemSortingOrder;
+    
+    public void PickUpWeapon(Weapon weapon) => SetWeapon(weapon);
+    public void ChangeWeapon() => SetWeapon(warrior.ChangeWeapon());
 
-    public bool IsHolded { get; private set; }
-    public Weapon HoldedWeapon => _holdedWeapon;
-
-    // ReSharper disable Unity.PerformanceAnalysis
-    public void PickUpWeapon(Weapon weapon)
+    private void SetWeapon(Weapon weapon)
     {
+        warrior.AddWeapon(weapon);
         _holdedWeapon = weapon;
 
         SetIconToUI(_holdedWeapon.gameObject);
-        SwitchSpriteItem(_holdedWeapon.gameObject, null);
         SetCharacterWeapon(_holdedWeapon);
 
         SetSpriteSortOrder();
-
-        IsHolded = true;
-    }
-
-    private void SwitchSpriteItem(GameObject item, Sprite sprite)
-    {
-        _currentWeaponIcon = item.GetComponentInChildren<SpriteRenderer>().sprite;
-        item.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
     }
 
     private void SetIconToUI(GameObject item)
     {
-        if (item == null)
-        {
-            _weaponUI.sprite = null;
-            _weaponUI.gameObject.SetActive(false);
-            return;
-        }
-
-        var icon = item.GetComponentInChildren<SpriteRenderer>().sprite;
-        _weaponUI.sprite = icon;
+        _weaponUI.sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
         _weaponUI.gameObject.SetActive(true);
     }
 
+    // private void SetNullIconToUI()
+    // {
+    //     _weaponUI.sprite = null;
+    //     _weaponUI.gameObject.SetActive(false);
+    // }
+    
     private void SetSpriteSortOrder()
     {
         var tempSprite = GetSpriteRenderer(_holdedWeapon.transform);
-
         _itemSortingOrder = tempSprite.sortingOrder;
-
         tempSprite.sortingOrder = _playerSpriteRenderer.sortingOrder + 1;
     }
 
@@ -68,6 +55,6 @@ public class WeaponHandler : MonoBehaviour
             return;
         }
 
-        warrior.weapon = weapon;
+        warrior._currentWeapon = weapon;
     }
 }

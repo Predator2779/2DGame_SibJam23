@@ -18,7 +18,7 @@ namespace Scripts.Character.Player.Handlers
             _weaponHandler ??= GetComponent<WeaponHandler>();
         }
 
-        public void PressedE()
+        public void Pressed_E()
         {
             if (_selectedItem != null)
             {
@@ -39,6 +39,8 @@ namespace Scripts.Character.Player.Handlers
             Put();
         }
 
+        public void Pressed_C() => _weaponHandler.ChangeWeapon();
+        
         private void PickUp()
         {
             // _itemHandler.PickUpItem();

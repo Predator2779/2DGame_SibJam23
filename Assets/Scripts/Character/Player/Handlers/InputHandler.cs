@@ -38,7 +38,8 @@ namespace Scripts.Character.Player.Handlers
             CheckMoving();
             Jump();
 
-            ItemPickOrPut();
+            CheckPress_E();
+            CheckPress_C();
 
             UseItem();
             UseWeapon();
@@ -113,11 +114,16 @@ namespace Scripts.Character.Player.Handlers
             if (Input.GetKeyDown(KeyCode.Space)) _player.Jump();
         }
 
-        private void ItemPickOrPut()
+        private void CheckPress_E()
         {
-            if (Input.GetKeyUp(KeyCode.E)) _pickItem.PressedE();
+            if (Input.GetKeyUp(KeyCode.E)) _pickItem.Pressed_E();
         }
 
+        private void CheckPress_C()
+        {
+            if (Input.GetKeyUp(KeyCode.C)) _pickItem.Pressed_C();
+        }
+        
         private void UseItem()
         {
             if (Input.GetKeyUp(KeyCode.F)) _player.UseItem();
@@ -128,17 +134,5 @@ namespace Scripts.Character.Player.Handlers
             if (Input.GetMouseButtonUp(0) && _player.TryGetComponent(out Warrior warrior))
                 warrior.Attack();
         }
-
-        // private void PickUpItem()
-        // {
-        //     // _itemHandler.PickUpItem();
-        //     // _weaponHandler.PickUpItem();
-        //     // SetPlayerSide(GetLastPlayerSide());
-        // }
-        //
-        // private void PutItem()
-        // {
-        //     // _itemHandler.PutItem();
-        // }
     }
 }

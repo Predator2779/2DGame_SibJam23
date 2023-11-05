@@ -5,22 +5,18 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private int _damage;
-    private int _damageFactor = 1;
+    [SerializeField] protected bool _destroyAfterUsing;
+    [SerializeField] protected float _delayUsing = 0.1f;
 
     public int Damage => _damage * _damageFactor;
+    private int _damageFactor = 1;
+    private bool _canUse = true;
 
     public int DamageFactor
     {
         set => _damageFactor = value;
     }
-
-    public string nameItem;
-
-    [SerializeField] protected bool _destroyAfterUsing;
-    [SerializeField] protected float _delayUsing = 0.1f;
-
-    protected bool _canUse = true;
-
+    
     private void Start() => _canUse = true;
 
     public void TakeDamage(List<HealthProcessor> healthProcessors)
