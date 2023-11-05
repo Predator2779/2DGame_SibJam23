@@ -7,15 +7,12 @@ namespace Scripts.Character.Player.Handlers
     public class InputHandler : MonoBehaviour
     {
         [SerializeField] private GameState _gameState;
-
-        [Header("Components:")]
         [SerializeField] private Animator _anim;
-
         [SerializeField] private PlayerAudioHandler _audioHandler;
 
-        private Classes.Person _player;
+        private Person _player;
         private TurnHandler _turnHandler;
-        private ItemHandler _itemHandler;
+        private PickItem _pickItem;
 
         private bool _isMoved;
         private float _verticalAxis;
@@ -23,15 +20,14 @@ namespace Scripts.Character.Player.Handlers
 
         private void OnValidate()
         {
-            if (_gameState == null)
-                _gameState = FindObjectOfType<GameState>();
+            if (_gameState == null) _gameState = FindObjectOfType<GameState>();
         }
 
         private void Start()
         {
-            _player = GetComponent<Classes.Person>();
+            _player = GetComponent<Person>();
             _turnHandler = GetComponent<TurnHandler>();
-            _itemHandler = GetComponent<ItemHandler>();
+            _pickItem = GetComponent<PickItem>();
         }
 
         private void Update()
@@ -45,6 +41,7 @@ namespace Scripts.Character.Player.Handlers
             ItemPickOrPut();
 
             UseItem();
+            UseWeapon();
 
             _anim.SetFloat("SpeedHorizontal", Mathf.Abs(GetMovementVector().x));
             _anim.SetFloat("SpeedUp", GetMovementVector().y);
@@ -103,7 +100,7 @@ namespace Scripts.Character.Player.Handlers
         }
 
         private void SetPlayerSide(TurnHandler.playerSides side) => _turnHandler.SetPlayerSide(side);
-        
+
         private void SetAxes()
         {
             // _verticalAxis = InputFunctions.GetVerticalAxis();
@@ -118,30 +115,30 @@ namespace Scripts.Character.Player.Handlers
 
         private void ItemPickOrPut()
         {
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                if (_itemHandler.IsHolded) PutItem();
-                else PickUpItem();
-            }
+            if (Input.GetKeyUp(KeyCode.E)) _pickItem.PressedE();
         }
-        
+
         private void UseItem()
         {
             if (Input.GetKeyUp(KeyCode.F)) _player.UseItem();
-        }     
-        
+        }
+
         private void UseWeapon()
         {
             if (Input.GetMouseButtonUp(0) && _player.TryGetComponent(out Warrior warrior))
                 warrior.Attack();
         }
-        
-        private void PickUpItem()
-        {
-            _itemHandler.PickUpItem();
-            SetPlayerSide(GetLastPlayerSide());
-        }
 
-        private void PutItem() => _itemHandler.PutItem();
+        // private void PickUpItem()
+        // {
+        //     // _itemHandler.PickUpItem();
+        //     // _weaponHandler.PickUpItem();
+        //     // SetPlayerSide(GetLastPlayerSide());
+        // }
+        //
+        // private void PutItem()
+        // {
+        //     // _itemHandler.PutItem();
+        // }
     }
 }

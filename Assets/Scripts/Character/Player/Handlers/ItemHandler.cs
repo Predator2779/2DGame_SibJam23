@@ -1,6 +1,5 @@
 using Scripts.Character.Classes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour
@@ -8,36 +7,26 @@ public class ItemHandler : MonoBehaviour
     [SerializeField] private Person person;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
     [SerializeField] private Image _itemUI;
-    [SerializeField] private Image _weaponUI;
 
-    private TransportableItem _selectedItem;
     private TransportableItem _holdedItem;
     private Sprite _currentItemIcon;
-    private Sprite __currentWeaponIcon;
     private int _itemSortingOrder;
 
     public bool IsHolded { get; private set; }
     public TransportableItem HoldedItem => _holdedItem;
 
     // ReSharper disable Unity.PerformanceAnalysis
-    public void PickUpItem()
+    public void PickUpItem(TransportableItem item)
     {
-        if (_selectedItem != null)
-        {
-            if (_selectedItem.TryGetComponent(out Weapon _)) return;
+        _holdedItem = item;
+        _holdedItem.PickUp(transform);
+        
+        SetIconToUI(_holdedItem);
+        SwitchSpriteItem(_holdedItem, null);
+        SetCharacterItem(_holdedItem);
+        SetSpriteSortOrder();
 
-            _selectedItem.PickUp(transform);
-            _holdedItem = _selectedItem;
-            _selectedItem = null;
-
-            SetIconToUI(_holdedItem);
-            SwitchSpriteItem(_holdedItem, null);
-            SetCharacterItem(_holdedItem);
-
-            SetSpriteSortOrder();
-
-            IsHolded = true;
-        }
+        IsHolded = true;
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
@@ -98,29 +87,5 @@ public class ItemHandler : MonoBehaviour
 
         if (item.TryGetComponent(out UsableItem usable))
             person.item = usable;
-    }
-
-    public void SelectItem(TransportableItem item)
-    {
-        if (IsNewItem(item)) _selectedItem = item;
-    }
-
-    public void DeselectItem(TransportableItem item)
-    {
-        if (!IsNewItem(item)) _selectedItem = null;
-    }
-
-    private bool IsNewItem(TransportableItem item) => _selectedItem != item;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out TransportableItem item))
-            _selectedItem = item;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out TransportableItem item) && item == _selectedItem)
-            _selectedItem = null;
     }
 }

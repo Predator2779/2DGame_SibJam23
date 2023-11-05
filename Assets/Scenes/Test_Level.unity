@@ -1112,6 +1112,8 @@ GameObject:
   - component: {fileID: 8933475632053708638}
   - component: {fileID: 2990308400910237233}
   - component: {fileID: 7864085275656361625}
+  - component: {fileID: 8933475632053708639}
+  - component: {fileID: 8933475632053708640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2171,7 +2173,6 @@ MonoBehaviour:
   person: {fileID: 5884930029602874050}
   _playerSpriteRenderer: {fileID: 3070092763202082876}
   _itemUI: {fileID: 7709232113375870796}
-  _weaponUI: {fileID: 97496983}
 --- !u!1 &3018089525029639660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,7 +2830,6 @@ GameObject:
   - component: {fileID: 8375291750726035417}
   - component: {fileID: 1507892795782540238}
   - component: {fileID: 1597547497569093693}
-  - component: {fileID: 6180327654916386462}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -3353,18 +3353,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6180327654916386462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4987887004134793554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16cfb22004296a942ad9b47f821b2527, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &6267675799992258249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4772,6 +4760,36 @@ MonoBehaviour:
   _gameState: {fileID: 493723683}
   _anim: {fileID: 1111127493158417255}
   _audioHandler: {fileID: 3343400407672054437}
+--- !u!114 &8933475632053708639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221398596877522316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2dfa1ed6c048cfbe6bc628eade4953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warrior: {fileID: 5884930029602874050}
+  _playerSpriteRenderer: {fileID: 3070092763202082876}
+  _weaponUI: {fileID: 97496983}
+--- !u!114 &8933475632053708640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221398596877522316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9fcaecc02f4a2f8954d585a1c99687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemHandler: {fileID: 2990308400910237233}
+  _weaponHandler: {fileID: 8933475632053708639}
+  _selectedItem: {fileID: 0}
 --- !u!224 &9082039919500894303
 RectTransform:
   m_ObjectHideFlags: 0
