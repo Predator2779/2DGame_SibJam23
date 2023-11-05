@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 0}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.25, y: 1.25, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8521307334991409516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 492254cc9cc80424b9ee7444a7fe9da0, type: 3}
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 21300000, guid: 19cca90746aef8d48908d8d33a2f44f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,10 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8521307334991409516}
   - component: {fileID: 8765153067813125887}
-  - component: {fileID: 5744473342974395016}
-  - component: {fileID: 2249849418513006135}
+  - component: {fileID: 8521307334991409512}
   m_Layer: 0
-  m_Name: Healer
+  m_Name: Fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +163,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5617142, y: 3.6991959}
   m_EdgeRadius: 0
---- !u!114 &5744473342974395016
+--- !u!114 &8521307334991409512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,20 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8521307334991409519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ffbd108366b9eb49813bb4e2b666f89, type: 3}
+  m_Script: {fileID: 11500000, guid: 856d17040a320bf4f8f325aeb7729eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyAfterUsing: 1
-  healPoints: 100
---- !u!114 &2249849418513006135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8521307334991409519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3590e64465049b58a6ac33a82ba1825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _damage: 0
+  _destroyAfterUsing: 0
+  _delayUsing: 0
+  _undamagedWeapon: 1

@@ -1,4 +1,5 @@
-﻿using Scripts.Character.Classes;
+﻿using System;
+using Scripts.Character.Classes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,12 @@ public class WeaponHandler : MonoBehaviour
     private Weapon _holdedWeapon;
     private Sprite _currentWeaponIcon;
     private int _itemSortingOrder;
-    
+
+    private void Start()
+    {
+        SetIconToUI(warrior.currentWeapon.gameObject);
+    }
+
     public void PickUpWeapon(Weapon weapon) => SetWeapon(weapon);
     public void ChangeWeapon() => SetWeapon(warrior.ChangeWeapon());
 
@@ -22,7 +28,6 @@ public class WeaponHandler : MonoBehaviour
 
         SetIconToUI(_holdedWeapon.gameObject);
         SetCharacterWeapon(_holdedWeapon);
-
         SetSpriteSortOrder();
     }
 
@@ -31,12 +36,6 @@ public class WeaponHandler : MonoBehaviour
         _weaponUI.sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
         _weaponUI.gameObject.SetActive(true);
     }
-
-    // private void SetNullIconToUI()
-    // {
-    //     _weaponUI.sprite = null;
-    //     _weaponUI.gameObject.SetActive(false);
-    // }
     
     private void SetSpriteSortOrder()
     {
@@ -55,6 +54,6 @@ public class WeaponHandler : MonoBehaviour
             return;
         }
 
-        warrior._currentWeapon = weapon;
+        warrior.currentWeapon = weapon;
     }
 }

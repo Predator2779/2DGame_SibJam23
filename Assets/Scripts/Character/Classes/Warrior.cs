@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,19 +6,18 @@ namespace Scripts.Character.Classes
 {
     public class Warrior : Person
     {
-        public Weapon _currentWeapon;
+        public Weapon currentWeapon;
         [Min(1)] public int attackDamage;
         [SerializeField] private HealthTrigger _healthTrigger;
-
         [SerializeField] private int _weaponIndex;
         [SerializeField] private List<Weapon> _weapons = new();
-        
+
         public void Attack()
         {
-            if (_currentWeapon != null)
+            if (currentWeapon != null)
             {
-                MultiplyDamage(_currentWeapon);
-                _currentWeapon.TakeDamage(_healthTrigger._healthProcessors);
+                MultiplyDamage(currentWeapon);
+                currentWeapon.TakeDamage(_healthTrigger._healthProcessors);
             }
         }
 
@@ -29,10 +29,10 @@ namespace Scripts.Character.Classes
             
                 if (nextIndex >= _weapons.Count) nextIndex = 0;
                 
-                _currentWeapon = _weapons[nextIndex];
+                currentWeapon = _weapons[nextIndex];
                 _weaponIndex = nextIndex;
 
-                return _currentWeapon;
+                return currentWeapon;
             }
 
             return null;
