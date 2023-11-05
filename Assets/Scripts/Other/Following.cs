@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Scripts.Other
 {
@@ -13,10 +11,7 @@ namespace Scripts.Other
         private Vector3 _offset;
         private bool _isMove;
 
-        private void Start()
-        {
-            _offset = transform.position;
-        }
+        private void Start() => _offset = transform.position;
 
         private void FixedUpdate()
         {
@@ -38,12 +33,14 @@ namespace Scripts.Other
             if (transform.position != _trackingObject.position + _offset && _isMove)
             {
                 transform.position = Vector2.MoveTowards(transform.position,
-                        _trackingObject.position + _offset, _speed * Time.deltaTime);
+                        GetVector(), _speed * Time.deltaTime);
 
                 return;
             }
 
             _isMove = false;
         }
+
+        private Vector2 GetVector() => new (_trackingObject.position.x + _offset.x, transform.position.y);
     }
 }
