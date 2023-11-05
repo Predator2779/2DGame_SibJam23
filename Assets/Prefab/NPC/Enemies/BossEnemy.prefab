@@ -96,10 +96,10 @@ GameObject:
   - component: {fileID: 476167869467397058}
   - component: {fileID: 476167869467397059}
   - component: {fileID: 476167869467397056}
-  - component: {fileID: 476167869467397057}
-  - component: {fileID: 476167869467397062}
+  - component: {fileID: 4528194943888119331}
+  - component: {fileID: 5608290031130428794}
   m_Layer: 0
-  m_Name: StrongEnemy
+  m_Name: BossEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,14 +177,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476167869467397060}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -195,7 +195,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &476167869467397056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   _maxHitPoints: 25
   _currentHitPoints: 0
   _coefDefense: 4
---- !u!114 &476167869467397057
+--- !u!114 &4528194943888119331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,15 +222,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 476167869467397060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a43e87f437b3d942aa629c534050961, type: 3}
+  m_Script: {fileID: 11500000, guid: f48b285b53924a8eadeb06b016a3c4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayer: 0
-  _movementSpeed: 0
+  _movementSpeed: 1
   _jumpForce: 0
   holdedItem: {fileID: 476167871014223357}
-  attackDamage: 1
---- !u!114 &476167869467397062
+  attackDamage: 3
+--- !u!114 &5608290031130428794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,10 +239,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 476167869467397060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b94210c16f11c4f97b43222dcb1ca6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7325583d5e9f4b2eaa1b7d828d5b9674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 0}
+  enemy: {fileID: 0}
+  meleeTrigger: {fileID: 2074399213323437694}
+  meleeDuration: 1
+  meleeCooldown: 3
 --- !u!1 &476167869973839607
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 476167871369972008}
   - component: {fileID: 476167871369972011}
+  - component: {fileID: 2074399213323437694}
   m_Layer: 0
   m_Name: MeleeTrigger
   m_TagString: Untagged
@@ -736,7 +740,7 @@ Transform:
   m_GameObject: {fileID: 476167871369972009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 18.59, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -785,8 +789,20 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 30}
+  m_Size: {x: 5, y: 30}
   m_EdgeRadius: 0
+--- !u!114 &2074399213323437694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476167871369972009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3919914649d048b49473e349213ca198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3271210852676869845
 GameObject:
   m_ObjectHideFlags: 0
