@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scripts.Character.Classes
 {
-    public class Warrior : Character
+    public class Warrior : Person
     {
         [Min(1)] public int attackDamage;
 

@@ -11,18 +11,4 @@ public class Weapon : UsableItem
     {
         set => _damageFactor = value;
     }
-
-    public override void PrimaryAction()
-    {
-        if (!_canUse) return;
-
-        if (_responseItems != null)
-            foreach (var usable in _responseItems)
-                usable.ResponseAction(gameObject);
-        
-        if (_destroyAfterUsing)
-            Destroy(gameObject);
-
-        StartCoroutine(CanUse());
-    }
 }

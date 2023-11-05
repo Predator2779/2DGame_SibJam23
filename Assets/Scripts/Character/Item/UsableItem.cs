@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,19 +23,27 @@ public class UsableItem : MonoBehaviour
     protected bool _disableComponent;
 
     protected bool _canUse = true;
-    protected List<IResponsable> _responseItems = new();
+    protected List<HealthProcessor> _responseItems = new();
 
-    public virtual void Update()
+    private void Start()
     {
-        if (_continuousExecution) PassiveAction();
+        _canUse = true;
     }
 
-    public virtual void PrimaryAction()
+    public void PrimaryAction()
     {
-        if (!enabled) return;
+        UseResponsable();
+    }
 
-        foreach (var usable in _responseItems)
-            usable.ResponseAction(gameObject);
+    protected virtual void UseResponsable()
+    {
+        if (!_canUse || !enabled) return;
+
+        if (_responseItems != null)
+            foreach (var responsable in _responseItems)
+                responsable.ResponseAction(gameObject);
+
+        StartCoroutine(CanUse());
 
         if (_disableComponent)
             enabled = false;
@@ -45,9 +54,8 @@ public class UsableItem : MonoBehaviour
 
     protected void DestroyItem()
     {
-        EventHandler.OnItemDestroy?.Invoke();
-        enabled = false;
         transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        EventHandler.OnItemDestroy?.Invoke();
     }
 
     public virtual void SecondaryAction()
@@ -68,23 +76,24 @@ public class UsableItem : MonoBehaviour
 
     private void AddToList(Collider2D collision)
     {
-        if (!collision.TryGetComponent(out IResponsable usable)) return;
+        if (!collision.TryGetComponent(out HealthProcessor usable)) return;
         if (!_responseItems.Contains(usable))
             _responseItems.Add(usable);
     }
 
     private void RemoveFromList(Collider2D collision)
     {
-        if (!collision.TryGetComponent(out IResponsable usable)) return;
+        if (!collision.TryGetComponent(out HealthProcessor usable)) return;
         if (_responseItems.Contains(usable))
             _responseItems.Remove(usable);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision) => AddToList(collision);
+
+    protected void OnTriggerStay2D(Collider2D collision)
     {
-        AddToList(collision);
         PassiveAction();
     }
 
-    private void OnTriggerExit2D(Collider2D collision) => RemoveFromList(collision);
+    protected void OnTriggerExit2D(Collider2D collision) => RemoveFromList(collision);
 }

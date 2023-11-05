@@ -14,7 +14,7 @@ namespace Scripts.Character.Player.Handlers
 
         [SerializeField] private PlayerAudioHandler _audioHandler;
 
-        private Classes.Character _player;
+        private Classes.Person _player;
         private TurnHandler _turnHandler;
         private ItemHandler _itemHandler;
 
@@ -34,7 +34,7 @@ namespace Scripts.Character.Player.Handlers
 
         private void Start()
         {
-            _player = GetComponent<Classes.Character>();
+            _player = GetComponent<Classes.Person>();
             _turnHandler = GetComponent<TurnHandler>();
             _itemHandler = GetComponent<ItemHandler>();
         }

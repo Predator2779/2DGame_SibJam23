@@ -1,10 +1,11 @@
 using Scripts.Character.Classes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour
 {
-    [SerializeField] private Scripts.Character.Classes.Character _character;
+    [FormerlySerializedAs("_character")] [SerializeField] private Scripts.Character.Classes.Person person;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
     [SerializeField] private Image _iconUI;
 
@@ -18,7 +19,7 @@ public class ItemHandler : MonoBehaviour
 
     private void Start()
     {
-        EventHandler.OnItemDestroy.AddListener(PutItem);
+        EventHandler.OnItemDestroy.AddListener(PutAndDestroy);
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
@@ -40,6 +41,23 @@ public class ItemHandler : MonoBehaviour
         }
     }
 
+    private void PutAndDestroy()
+    {
+        if (_holdedItem != null)
+        {
+            GetSpriteRenderer(_holdedItem.transform).sortingOrder = _itemSortingOrder;
+            SwitchSpriteItem(_holdedItem, _currentIcon);
+            SetIconToUI(null);
+
+            _holdedItem.Put();
+            Destroy(_holdedItem.gameObject);
+            _holdedItem = null;
+            SetCharacterItem(null);
+
+            IsHolded = false;
+        }
+    }
+    
     // ReSharper disable Unity.PerformanceAnalysis
     public void PutItem()
     {
@@ -88,7 +106,7 @@ public class ItemHandler : MonoBehaviour
 
     private SpriteRenderer GetSpriteRenderer(Transform t) => t.GetChild(0).GetComponent<SpriteRenderer>();
 
-    private void SetCharacterItem(TransportableItem item) => _character.holdedItem = item; //
+    private void SetCharacterItem(TransportableItem item) => person.holdedItem = item;
 
     public void SelectItem(TransportableItem item)
     {

@@ -1,53 +1,92 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Healer : UsableItem
+public class Healer : MonoBehaviour
 {
+    public string nameItem;
+
     [SerializeField] private int healPoints;
     public int HealPoints => healPoints;
 
-    /// <summary>
-    /// Действует на применившего и на всех в радиусе.
-    /// </summary>
-    public override void PrimaryAction()
+    [Tooltip("Одноразовые предметы исчезают после использования")] [SerializeField]
+    protected bool _destroyAfterUsing;
+
+    [Tooltip("Выполняется при попадании в триггер")] [SerializeField]
+    protected bool _passiveExecution;
+
+    [Tooltip("Задержка использования")] [SerializeField]
+    protected float _delayUsing = 0.1f;
+
+    [Tooltip("Удаление компонента у предмета, после использования")] [SerializeField]
+    protected bool _disableComponent;
+
+    protected bool _canUse = true;
+    protected List<HealthProcessor> _responseItems = new();
+
+    protected void UseResponsable()
     {
         if (!_canUse) return;
-
-        HealingCaster();
 
         if (_responseItems != null)
             foreach (var responsable in _responseItems)
-                responsable.ResponseAction(gameObject);
+                if (responsable.TryGetComponent(out HealthProcessor healthProcessor))
+                    healthProcessor.ResponseAction(gameObject);
+
+        StartCoroutine(CanUse());
 
         if (_destroyAfterUsing)
             DestroyItem();
-
-        StartCoroutine(CanUse());
     }
 
-    /// <summary>
-    /// Действует исключительно на применившего.
-    /// </summary>
-    public override void SecondaryAction()
+    private void Start()
     {
-        if (!_canUse) return;
-
-        HealingCaster();
-
-        if (_destroyAfterUsing)
-            Destroy(gameObject);
-
-        StartCoroutine(CanUse());
+        _canUse = true;
     }
 
-    /// <summary>
-    /// Лечит заклинателя.
-    /// </summary>
-    private void HealingCaster()
+    public void PrimaryAction()
     {
-        if (
-           transform.parent != null &&
-           transform.parent.transform.TryGetComponent(out IResponsable responsable)
-           ) 
-            responsable.ResponseAction(gameObject);
+        UseResponsable();
     }
+
+    protected void DestroyItem()
+    {
+        transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        EventHandler.OnItemDestroy?.Invoke();
+    }
+
+    public void PassiveAction()
+    {
+        if (_passiveExecution) PrimaryAction();
+    }
+
+    protected IEnumerator CanUse()
+    {
+        _canUse = false;
+        yield return new WaitForSeconds(_delayUsing);
+        _canUse = true;
+    }
+
+    private void AddToList(Collider2D collision)
+    {
+        if (!collision.TryGetComponent(out HealthProcessor usable)) return;
+        if (!_responseItems.Contains(usable))
+            _responseItems.Add(usable);
+    }
+
+    private void RemoveFromList(Collider2D collision)
+    {
+        if (!collision.TryGetComponent(out HealthProcessor usable)) return;
+        if (_responseItems.Contains(usable))
+            _responseItems.Remove(usable);
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision) => AddToList(collision);
+
+    protected void OnTriggerStay2D(Collider2D collision)
+    {
+        PassiveAction();
+    }
+
+    protected void OnTriggerExit2D(Collider2D collision) => RemoveFromList(collision);
 }

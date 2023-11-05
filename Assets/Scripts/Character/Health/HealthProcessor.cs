@@ -18,14 +18,14 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
     [SerializeField] private int _currentHitPoints;
     [SerializeField] [Min(1)] private float _coefDefense;
 
-    private Scripts.Character.Classes.Character _character;
+    private Scripts.Character.Classes.Person _person;
     private Health _health;
 
     private void Start() => Initialize();
 
     private void Initialize()
     {
-        _character = GetComponent<Scripts.Character.Classes.Character>();
+        _person = GetComponent<Scripts.Character.Classes.Person>();
 
         if (_spriteRenderer == null)
             _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -90,6 +90,6 @@ public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
 
     private void CheckDeath()
     {
-        if (_currentHitPoints <= 0) _character.Death();
+        if (_currentHitPoints <= 0) _person.Death();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Scripts.Character.Classes
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Character : MonoBehaviour
+    public class Person : MonoBehaviour
     {
         [SerializeField] private bool _isPlayer;
         [SerializeField] [Range(0, 10)] private int _movementSpeed;

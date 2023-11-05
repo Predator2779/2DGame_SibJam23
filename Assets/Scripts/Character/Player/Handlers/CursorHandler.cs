@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-    
+using UnityEngine.Serialization;
+
 namespace Scripts.Character.Player.Handlers
 {
     public class CursorController : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
-        [SerializeField] private Classes.Character _character;
+        [FormerlySerializedAs("_character")] [SerializeField] private Classes.Person person;
         [SerializeField] private ItemHandler _itemHandler;
         [SerializeField] private float _requriedDistance;
         
@@ -38,7 +39,7 @@ namespace Scripts.Character.Player.Handlers
 
         private bool DistanceIsReached(Transform obj)
         {
-            float currentDistance = Vector2.Distance(_character.transform.position, obj.position);
+            float currentDistance = Vector2.Distance(person.transform.position, obj.position);
 
             if (currentDistance <= _requriedDistance)
                 return true;

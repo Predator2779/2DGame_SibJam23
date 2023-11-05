@@ -20,11 +20,11 @@ public class TurnHandler : MonoBehaviour
     [Header("Player Side:")]
     public playerSides currentSide;
 
-    private Scripts.Character.Classes.Character _player;
+    private Scripts.Character.Classes.Person _player;
 
     private void Start()
     {
-        _player = GetComponent<Scripts.Character.Classes.Character>();
+        _player = GetComponent<Scripts.Character.Classes.Person>();
         _itemHandler = GetComponent<ItemHandler>();
 
         SetPlayerSide(playerSides.Front);
