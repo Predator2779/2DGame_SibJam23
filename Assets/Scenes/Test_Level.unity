@@ -1169,7 +1169,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1122119357921957928}
   - component: {fileID: 33572510733555643}
-  - component: {fileID: 1122119357921957933}
   - component: {fileID: 1122119357921957934}
   m_Layer: 0
   m_Name: Tear
@@ -1178,18 +1177,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1122119357921957933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122119357921957931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16cfb22004296a942ad9b47f821b2527, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1122119357921957934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,12 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0330d18be85743338a0ae1927309744b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameItem: Tear
   _destroyAfterUsing: 1
-  _continuousExecution: 0
-  _passiveExecution: 1
-  _delayUsing: 0
-  _disableComponent: 1
   tearPoints: 1
 --- !u!114 &1188331409193352794
 MonoBehaviour:

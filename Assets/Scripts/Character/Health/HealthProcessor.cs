@@ -1,10 +1,9 @@
 using Core.Health;
 using System.Collections;
-using Scripts.Character.Classes;
 using Scripts.Core.Global;
 using UnityEngine;
 
-public class HealthProcessor : MonoBehaviour, IHealth, IResponsable
+public class HealthProcessor : MonoBehaviour
 {
     [Header("Required Components")] [SerializeField]
     private SpriteRenderer _spriteRenderer;
