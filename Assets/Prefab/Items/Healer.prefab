@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8521307334991409516}
   - component: {fileID: 8765153067813125887}
   - component: {fileID: 5744473342974395016}
+  - component: {fileID: 2249849418513006135}
   m_Layer: 0
   m_Name: Healer
   m_TagString: Untagged
@@ -175,9 +176,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffbd108366b9eb49813bb4e2b666f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameItem: Healer
-  healPoints: 100
   _destroyAfterUsing: 1
-  _passiveExecution: 1
-  _delayUsing: 0.1
-  _disableComponent: 0
+  healPoints: 100
+--- !u!114 &2249849418513006135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521307334991409519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3590e64465049b58a6ac33a82ba1825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,3 +1,4 @@
+using Scripts.Character.Classes;
 using Scripts.Core.Global;
 using UnityEngine;
 
@@ -5,8 +6,6 @@ namespace Scripts.Character.Player.Handlers
 {
     public class InputHandler : MonoBehaviour
     {
-        #region Vars
-
         [SerializeField] private GameState _gameState;
 
         [Header("Components:")]
@@ -21,10 +20,6 @@ namespace Scripts.Character.Player.Handlers
         private bool _isMoved;
         private float _verticalAxis;
         private float _horizontalAxis;
-
-        #endregion
-
-        #region Base Methods
 
         private void OnValidate()
         {
@@ -49,8 +44,7 @@ namespace Scripts.Character.Player.Handlers
 
             ItemPickOrPut();
 
-            UseItem_Primary();
-            UseItem_Secondary();
+            UseItem();
 
             _anim.SetFloat("SpeedHorizontal", Mathf.Abs(GetMovementVector().x));
             _anim.SetFloat("SpeedUp", GetMovementVector().y);
@@ -74,10 +68,6 @@ namespace Scripts.Character.Player.Handlers
             }
         }
 
-        #endregion
-
-        #region Other
-
         private void CheckMoving()
         {
             if (Input.GetKeyDown(KeyCode.Space) || _verticalAxis != 0 || _horizontalAxis != 0)
@@ -85,9 +75,15 @@ namespace Scripts.Character.Player.Handlers
             else _isMoved = false;
         }
 
-        #endregion
+        private Vector2 GetMovementVector()
+        {
+            var v = _player.transform.up * _verticalAxis;
+            var h = _player.transform.right * _horizontalAxis;
 
-        #region Rotation
+            Vector2 vector = h + v;
+
+            return vector;
+        }
 
         private TurnHandler.playerSides GetLastPlayerSide() => _turnHandler.currentSide;
 
@@ -107,11 +103,7 @@ namespace Scripts.Character.Player.Handlers
         }
 
         private void SetPlayerSide(TurnHandler.playerSides side) => _turnHandler.SetPlayerSide(side);
-
-        #endregion
-
-        #region Inputs
-
+        
         private void SetAxes()
         {
             // _verticalAxis = InputFunctions.GetVerticalAxis();
@@ -132,9 +124,18 @@ namespace Scripts.Character.Player.Handlers
                 else PickUpItem();
             }
         }
-
-        #region Items
-
+        
+        private void UseItem()
+        {
+            if (Input.GetKeyUp(KeyCode.F)) _player.UseItem();
+        }     
+        
+        private void UseWeapon()
+        {
+            if (Input.GetMouseButtonUp(0) && _player.TryGetComponent(out Warrior warrior))
+                warrior.Attack();
+        }
+        
         private void PickUpItem()
         {
             _itemHandler.PickUpItem();
@@ -142,29 +143,5 @@ namespace Scripts.Character.Player.Handlers
         }
 
         private void PutItem() => _itemHandler.PutItem();
-
-        #endregion
-
-        private void UseItem_Primary()
-        {
-            if (Input.GetKeyUp(KeyCode.F)) _player.UsePrimaryAction();
-        }
-
-        private void UseItem_Secondary()
-        {
-            // if (Input.GetMouseButtonUp(1)) _player.UseSecondaryAction();
-        }
-
-        private Vector2 GetMovementVector()
-        {
-            var v = _player.transform.up * _verticalAxis;
-            var h = _player.transform.right * _horizontalAxis;
-
-            Vector2 vector = h + v;
-
-            return vector;
-        }
-
-        #endregion
     }
 }

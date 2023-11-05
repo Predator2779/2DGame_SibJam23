@@ -1,12 +1,8 @@
-using System;
 using UnityEngine;
 
 public class TransportableItem : MonoBehaviour
 {
     private bool _isNotTaken = true;
-    // private Rigidbody2D _rbody;
-    //
-    // private void Start() => _rbody = GetComponent<Rigidbody2D>();
 
     public bool IsNotTaken
     {
@@ -18,9 +14,7 @@ public class TransportableItem : MonoBehaviour
     {
         if (IsNotTaken)
         {
-            // _rbody.simulated = false;
             transform.SetParent(parent.transform);
-
             IsNotTaken = false;
         }
     }
@@ -30,8 +24,6 @@ public class TransportableItem : MonoBehaviour
         if (!IsNotTaken)
         {
             transform.SetParent(null);
-            // _rbody.simulated = true;
-            
             IsNotTaken = true;
         }
     }

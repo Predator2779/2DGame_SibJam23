@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,33 +8,23 @@ public class UsableItem : MonoBehaviour
 
     [Tooltip("Одноразовые предметы исчезают после использования")] [SerializeField]
     protected bool _destroyAfterUsing;
-
     [Tooltip("Выполняется непрерывно")] [SerializeField]
     protected bool _continuousExecution;
-
     [Tooltip("Выполняется при попадании в триггер")] [SerializeField]
     protected bool _passiveExecution;
-
     [Tooltip("Задержка использования")] [SerializeField]
     protected float _delayUsing = 0.1f;
-
     [Tooltip("Удаление компонента у предмета, после использования")] [SerializeField]
     protected bool _disableComponent;
 
     protected bool _canUse = true;
     protected List<HealthProcessor> _responseItems = new();
 
-    private void Start()
-    {
-        _canUse = true;
-    }
+    private void Start() => _canUse = true;
 
-    public void PrimaryAction()
-    {
-        UseResponsable();
-    }
+    public void PrimaryAction() => UseResponsable();
 
-    protected virtual void UseResponsable()
+    private void UseResponsable()
     {
         if (!_canUse || !enabled) return;
 
@@ -49,25 +38,15 @@ public class UsableItem : MonoBehaviour
             enabled = false;
 
         if (_destroyAfterUsing)
-            DestroyItem();
+            Destroy(gameObject);
     }
 
-    protected void DestroyItem()
-    {
-        transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        EventHandler.OnItemDestroy?.Invoke();
-    }
-
-    public virtual void SecondaryAction()
-    {
-    }
-
-    public void PassiveAction()
+    private void PassiveAction()
     {
         if (_passiveExecution) PrimaryAction();
     }
 
-    protected IEnumerator CanUse()
+    private IEnumerator CanUse()
     {
         _canUse = false;
         yield return new WaitForSeconds(_delayUsing);
@@ -89,11 +68,6 @@ public class UsableItem : MonoBehaviour
     }
 
     protected void OnTriggerEnter2D(Collider2D collision) => AddToList(collision);
-
-    protected void OnTriggerStay2D(Collider2D collision)
-    {
-        PassiveAction();
-    }
-
+    protected void OnTriggerStay2D(Collider2D collision) => PassiveAction();
     protected void OnTriggerExit2D(Collider2D collision) => RemoveFromList(collision);
 }

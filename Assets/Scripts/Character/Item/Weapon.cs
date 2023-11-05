@@ -6,9 +6,5 @@ public class Weapon : UsableItem
     private int _damageFactor = 1;
 
     public int Damage => _damage * _damageFactor;
-
-    public int DamageFactor
-    {
-        set => _damageFactor = value;
-    }
+    public int DamageFactor { set => _damageFactor = value; }
 }

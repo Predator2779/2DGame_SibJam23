@@ -4,14 +4,16 @@ namespace Scripts.Character.Classes
 {
     public class Warrior : Person
     {
+        public Weapon weapon;
         [Min(1)] public int attackDamage;
 
-        public override void UsePrimaryAction()
+        public void Attack()
         {
-            if (holdedItem != null && holdedItem.TryGetComponent(out Weapon weapon))
+            if (weapon != null)
+            {
                 MultiplyDamage(weapon);
-
-            base.UsePrimaryAction();
+                weapon.PrimaryAction();
+            }
         }
 
         private void MultiplyDamage(Weapon weapon) => weapon.DamageFactor = attackDamage;

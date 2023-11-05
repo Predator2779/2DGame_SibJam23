@@ -8,13 +8,7 @@ public class WarriorAI : CharacterAI
 
     protected Warrior _warrior;
 
-    protected override void Awake()
-    {
-        _warrior = GetComponent<Warrior>();
-
-        if (_warrior.holdedItem != null )
-            _warrior.holdedItem.IsNotTaken = false;
-    }
+    protected override void Awake() => _warrior = GetComponent<Warrior>();
 
     protected override void Update()
     {
@@ -25,8 +19,8 @@ public class WarriorAI : CharacterAI
 
     private void CheckEnemy()
     {
-        if (_enemy != null && _enemy.TryGetComponent(out HealthProcessor healthProcessor))
-            _warrior.UsePrimaryAction();
+        if (_enemy != null && _enemy.TryGetComponent(out HealthProcessor _))
+            _warrior.Attack();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

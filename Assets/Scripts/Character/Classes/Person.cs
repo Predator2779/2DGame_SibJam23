@@ -1,3 +1,4 @@
+using Character.Item;
 using Scripts.Core.Common;
 using Scripts.Core.Global;
 using Unity.Mathematics;
@@ -11,32 +12,18 @@ namespace Scripts.Character.Classes
         [SerializeField] private bool _isPlayer;
         [SerializeField] [Range(0, 10)] private int _movementSpeed;
         [SerializeField] private float _jumpForce;
-        [SerializeField] private TransportableItem _loot;
+        [SerializeField] private Loot _loot;
         
-        public TransportableItem holdedItem;
-
+        public UsableItem item;
         private Rigidbody2D _rbody;
 
         private void Awake() => _rbody = GetComponent<Rigidbody2D>();
 
         #region Character
 
-        public virtual void UsePrimaryAction()
+        public void UseItem()
         {
-            if (
-                    holdedItem != null &&
-                    holdedItem.TryGetComponent(out UsableItem usedItem)
-            )
-                usedItem.PrimaryAction();
-        }
-
-        public void UseSecondaryAction()
-        {
-            if (
-                    holdedItem != null &&
-                    holdedItem.TryGetComponent(out UsableItem usedItem)
-            )
-                usedItem.SecondaryAction();
+            if (item != null) item.PrimaryAction();
         }
 
         public void MoveTo(Vector2 movementDirection)
