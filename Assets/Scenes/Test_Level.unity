@@ -787,6 +787,7 @@ MonoBehaviour:
   _damage: 50
   _destroyAfterUsing: 0
   _delayUsing: 0.1
+  _undamagedWeapon: 0
 --- !u!61 &1274551708
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1811,6 +1812,7 @@ MonoBehaviour:
   _damage: 5
   _destroyAfterUsing: 0
   _delayUsing: 1
+  _undamagedWeapon: 0
 --- !u!224 &1557989196186888573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2383,7 +2385,7 @@ MonoBehaviour:
   _jumpForce: 0
   _loot: {fileID: 2249849418513006135, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
   item: {fileID: 0}
-  _currentWeapon: {fileID: 0}
+  currentWeapon: {fileID: 0}
   attackDamage: 1
   _healthTrigger: {fileID: 8375291750726035418}
   _weaponIndex: 0
@@ -2582,6 +2584,7 @@ MonoBehaviour:
   _damage: 10
   _destroyAfterUsing: 0
   _delayUsing: 0.1
+  _undamagedWeapon: 0
 --- !u!224 &3184462477280012475
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3530,7 +3533,7 @@ MonoBehaviour:
   _jumpForce: 50
   _loot: {fileID: 2249849418513006135, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
   item: {fileID: 0}
-  _currentWeapon: {fileID: 8521307334991409512, guid: ad16f378472929c41aa77fc3e59f2ce6, type: 3}
+  currentWeapon: {fileID: 8521307334991409512, guid: ad16f378472929c41aa77fc3e59f2ce6, type: 3}
   attackDamage: 1
   _healthTrigger: {fileID: 1725897256}
   _weaponIndex: 0
