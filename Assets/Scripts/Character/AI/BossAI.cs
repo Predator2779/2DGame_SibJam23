@@ -2,38 +2,39 @@
 using Scripts.Character.Classes;
 using UnityEngine;
 
-[RequireComponent(typeof(Boss))]
+[RequireComponent(typeof(Warrior))]
 public class BossAI : CharacterAI
 {
-    [SerializeField] private Transform enemy;
-
     [SerializeField] private Trigger meleeTrigger;
-
     [SerializeField] private float meleeDuration;
     [SerializeField] private float meleeCooldown;
+    
     private float _meleeTimestamp = float.MinValue;
     private bool _isInMeleeRange = false;
 
     private BossAIState _state = BossAIState.Armed;
     private float _stateTimestamp = 0f;
 
-    private Boss _boss;
-
+    private Warrior _boss;
+    private Transform _enemy;
+    
     protected override void Awake()
     {
-        _boss = GetComponent<Boss>();
+        _boss = GetComponent<Warrior>();
 
         meleeTrigger._triggerEnterCallback = (_, c) =>
         {
-            if (c.transform == enemy)
+            if (c.CompareTag("Player"))
             {
+                _enemy = c.transform;
                 _isInMeleeRange = true;
             }
         };
         meleeTrigger._triggerExitCallback = (_, c) =>
         {
-            if (c.transform == enemy)
+            if (c.CompareTag("Player"))
             {
+                _enemy = null;
                 _isInMeleeRange = false;
             }
         };
@@ -46,11 +47,13 @@ public class BossAI : CharacterAI
             case BossAIState.Idle:
                 break;
             case BossAIState.Armed:
-                _boss.MoveTo((Vector2.right * (enemy.position.x - meleeTrigger.transform.position.x)).normalized);
+                if (_enemy == null) return;
+                
+                _boss.MoveTo((Vector2.right * (_enemy.position.x - meleeTrigger.transform.position.x)).normalized);
 
                 if (_isInMeleeRange && Time.time - _meleeTimestamp > meleeDuration + meleeCooldown)
                 {
-                    _boss.UsePrimaryAction();
+                    _boss.Attack();
                     _state = BossAIState.MeleeAttack;
                     _meleeTimestamp = Time.time;
                 }
@@ -63,7 +66,6 @@ public class BossAI : CharacterAI
                 {
                     _state = BossAIState.Armed;
                 }
-
                 break;
             case BossAIState.RangedAttack:
                 break;
@@ -80,7 +82,7 @@ public class BossAI : CharacterAI
     {
         if (_state == BossAIState.Idle)
         {
-            _state = _boss.holdedItem != null ? BossAIState.Armed : BossAIState.Disarmed;
+            _state = _boss.currentWeapon != null ? BossAIState.Armed : BossAIState.Disarmed;
         }
     }
 
