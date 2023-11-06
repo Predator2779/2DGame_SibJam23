@@ -29,7 +29,6 @@ namespace Scripts.Character.Classes
             var thrownWeapon = Instantiate(thrownWeaponPrefab, heldWeapon.transform.position, rotation);
             var weaponRigidbody = thrownWeapon.GetComponent<Rigidbody2D>();
             weaponRigidbody.velocity = rotation * Vector3.right * thrownWeaponSpeedH + Vector3.up * thrownWeaponSpeedV;
-            weaponRigidbody.angularVelocity = Math.Abs((rotation.eulerAngles.y % 360) - 180) < 90 ? 60 : -720;
             heldWeapon.gameObject.SetActive(false);
             return thrownWeapon;
         }

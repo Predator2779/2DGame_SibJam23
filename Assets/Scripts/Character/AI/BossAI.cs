@@ -66,7 +66,6 @@ public class BossAI : CharacterAI
 
     protected override void Update()
     {
-        Debug.Log(_state);
         switch (_state)
         {
             case BossAIState.Idle:
