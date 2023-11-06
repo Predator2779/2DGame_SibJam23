@@ -10,6 +10,7 @@ namespace Scripts.Character.Classes
     [RequireComponent(typeof(Rigidbody2D))]
     public class Person : MonoBehaviour
     {
+        [SerializeField] private GameObject _level;
         [SerializeField] private SpriteRenderer _spriteRend;
         [SerializeField] private bool _isPlayer;
         [SerializeField] [Range(0, 10)] private int _movementSpeed;
@@ -88,8 +89,8 @@ namespace Scripts.Character.Classes
                 Destroy(gameObject);
                 return;
             }
-
-            EventHandler.OnPlayerDeath?.Invoke();
+            
+            Destroy(_level);
         }
 
         #endregion
