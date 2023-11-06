@@ -99,8 +99,10 @@ GameObject:
   - component: {fileID: 476167869467397056}
   - component: {fileID: 5238258020723647861}
   - component: {fileID: 2416029822377993010}
+  - component: {fileID: 476167869467397057}
+  - component: {fileID: 476167869467397062}
   m_Layer: 9
-  m_Name: ArcherEnemy
+  m_Name: ArcherEnemy reserve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +116,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476167869467397060}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 396.1, y: 43.9, z: -1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -83.5, y: -69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -210,7 +212,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 476167869462963906}
   _healthBar: {fileID: 476167870097791277}
   _maxHitPoints: 25
-  _currentHitPoints: 25
+  _currentHitPoints: 0
   _coefDefense: 4
 --- !u!114 &5238258020723647861
 MonoBehaviour:
@@ -226,9 +228,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRend: {fileID: 0}
   _isPlayer: 0
-  _movementSpeed: 0
-  _jumpForce: 0
-  _loot: {fileID: 0}
+  _movementSpeed: 2
+  _jumpForce: 2
+  _loot: {fileID: 3396698439206600077, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
   arrowPrefab: {fileID: 9180132922819560335, guid: e5c3911987423a641b79bbc7970897b8, type: 3}
 --- !u!114 &2416029822377993010
 MonoBehaviour:
@@ -245,6 +247,40 @@ MonoBehaviour:
   attackTrigger: {fileID: 4994322729446394581}
   attackDuration: 1
   attackCooldown: 3
+--- !u!114 &476167869467397057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476167869467397060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a43e87f437b3d942aa629c534050961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRend: {fileID: 0}
+  _isPlayer: 0
+  _movementSpeed: 0
+  _jumpForce: 0
+  _loot: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  attackDamage: 1
+  weaponTrigger: {fileID: 0}
+  _weaponIndex: 0
+  _weapons: []
+--- !u!114 &476167869467397062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476167869467397060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b94210c16f11c4f97b43222dcb1ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &476167869973839607
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +595,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &476167870364950642
 MonoBehaviour:
@@ -666,7 +702,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 22, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -677,7 +713,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 80, y: 30}
+  m_Size: {x: 30, y: 30}
   m_EdgeRadius: 0
 --- !u!114 &4994322729446394581
 MonoBehaviour:

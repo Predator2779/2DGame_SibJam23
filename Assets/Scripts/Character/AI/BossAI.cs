@@ -23,25 +23,25 @@ public class BossAI : CharacterAI
     private float _stateTimestamp = 0f;
 
     private Boss _boss;
-    private Transform _enemy;
+    [SerializeField] private Transform _enemy;
 
     private ThrownWeapon _thrownWeapon;
 
     protected override void Awake()
     {
         _boss = GetComponent<Boss>();
-        _enemy = GameObject.FindGameObjectWithTag("Player").transform;
 
         meleeTrigger._triggerEnterCallback = (_, c) =>
         {
-            if (c.CompareTag("Player"))
+            if (c.transform.CompareTag("Player"))
             {
+                _enemy = c.transform;
                 _isInMeleeRange = true;
             }
         };
         meleeTrigger._triggerExitCallback = (_, c) =>
         {
-            if (c.CompareTag("Player"))
+            if (c.transform.CompareTag("Player"))
             {
                 _isInMeleeRange = false;
             }
@@ -49,14 +49,15 @@ public class BossAI : CharacterAI
 
         rangedTrigger._triggerEnterCallback = (_, c) =>
         {
-            if (c.CompareTag("Player"))
+            if (c.transform.CompareTag("Player"))
             {
+                _enemy = c.transform;
                 _isInRange = true;
             }
         };
         rangedTrigger._triggerExitCallback = (_, c) =>
         {
-            if (c.CompareTag("Player"))
+            if (c.transform.CompareTag("Player"))
             {
                 _isInRange = false;
             }
@@ -65,12 +66,13 @@ public class BossAI : CharacterAI
 
     protected override void Update()
     {
-        Debug.Log(Time.time + " " + _state);
+        Debug.Log(_state);
         switch (_state)
         {
             case BossAIState.Idle:
                 break;
             case BossAIState.Armed:
+                
                 if (_enemy == null) return;
 
                 Vector2 moveDirection = GetMoveDirection();
@@ -150,10 +152,10 @@ public class BossAI : CharacterAI
     
     private Vector2 GetMoveDirection()
     {
-        var target = (rangedDuration + rangedCooldown) - (Time.time - _rangedTimestamp) < 2
-            ? rangedTrigger.transform.position.x
-            : meleeTrigger.transform.position.x;
-        return (Vector2.right * (_enemy.position.x - target)).normalized;
+        // var target = (rangedDuration + rangedCooldown) - (Time.time - _rangedTimestamp) < 2
+        //     ? rangedTrigger.transform.position.x
+        //     : meleeTrigger.transform.position.x;
+        return (Vector2.right * (_enemy.position.x - transform.position.x)).normalized;
     }
     
     private enum BossAIState

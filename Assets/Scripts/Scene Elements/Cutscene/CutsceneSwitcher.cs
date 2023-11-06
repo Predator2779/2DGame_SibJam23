@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ public class CutsceneSwitcher : MonoBehaviour
     private bool _isShowed;
     private int _currentCutscene;
     private int _currentSlide;
+
+    private void Start()
+    {
+        InitializeCutscene();
+    }
 
     private void Update()
     {
@@ -53,9 +59,9 @@ public class CutsceneSwitcher : MonoBehaviour
 
     private void FinilizeCutscene()
     {
-        _currentCutscene++;
         _slides[_currentSlide].SetActive(false);
         _cutScenes[_currentCutscene].SetActive(false);
+        _currentCutscene++;
         _isShowed = false;
     }
 }

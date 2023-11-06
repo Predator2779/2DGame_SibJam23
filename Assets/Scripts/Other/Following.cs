@@ -8,10 +8,10 @@ namespace Scripts.Other
         // [SerializeField] private float _distance;
         [SerializeField] private float _speed;
 
-        /*private Vector3 _offset;
-        private bool _isMove;
+        // private Vector3 _offset;
+        // private bool _isMove;
 
-        private void Start() => _offset = transform.position;*/
+        // private void Start() => _offset = transform.position;
 
         private void FixedUpdate()
         {
@@ -44,6 +44,8 @@ namespace Scripts.Other
         //     _isMove = false;
         // }
 
-        private Vector2 GetVector() => new (_trackingObject.position.x, transform.position.y);
+        private Vector2 GetVector() => _trackingObject.position;
+
+        // private Vector2 GetVector() => new (_trackingObject.position.x, transform.position.y);
     }
 }

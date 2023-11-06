@@ -22,12 +22,12 @@ namespace Character.AI
         protected override void Awake()
         {
             _archer = GetComponent<Archer>();
-            _enemy = GameObject.FindWithTag("Player");
 
             attackTrigger._triggerEnterCallback = (_, c) =>
             {
                 if (c.CompareTag("Player"))
                 {
+                    _enemy = c.gameObject;
                     _isInRange = true;
                 }
             };
@@ -35,6 +35,7 @@ namespace Character.AI
             {
                 if (c.CompareTag("Player"))
                 {
+                    _enemy = null;
                     _isInRange = false;
                 }
             };
@@ -45,8 +46,9 @@ namespace Character.AI
             switch (_state)
             {
                 case ArcherAIState.Idle:
-                    _archer.RotateByAngle(_archer.transform,
-                        _enemy.transform.position.x > transform.position.x ? 0f : 180f);
+                    if (_enemy != null)
+                        _archer.RotateByAngle(_archer.transform,
+                                _enemy.transform.position.x > transform.position.x ? 0f : 180f);
 
                     if (_isInRange && Time.time - _attackTimestamp > attackDuration + attackCooldown)
                     {
@@ -61,6 +63,7 @@ namespace Character.AI
                     {
                         _state = ArcherAIState.Idle;
                     }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
