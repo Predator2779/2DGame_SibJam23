@@ -3704,7 +3704,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1820, y: 980}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6697681880770180087
 CanvasRenderer:
@@ -6230,7 +6230,7 @@ MonoBehaviour:
   _jumpForce: 0
   _loot: {fileID: 3396698439206600077, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
   heldWeapon: {fileID: 7388084904051600342}
-  attackDamage: 2
+  attackDamage: 3
   weaponTrigger: {fileID: 4040971454972238510}
   thrownWeaponPrefab: {fileID: 8018810086355906838, guid: b9dc22c9373ff54488633b314238a3ba, type: 3}
   thrownWeaponSpeedH: 200
@@ -10361,7 +10361,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1820, y: 980}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2351128868902215968
 CanvasRenderer:
@@ -13857,7 +13857,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1820, y: 980}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6022444300199574987
 CanvasRenderer:
