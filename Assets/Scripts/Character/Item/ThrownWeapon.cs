@@ -23,7 +23,7 @@ namespace Character.Item
                 TakeDamage(new List<HealthProcessor> {healthProcessor});
             }
 
-            if (other.gameObject.layer == 10)
+            if (other.CompareTag("Ground"))
             {
                 _rigidbody.bodyType = RigidbodyType2D.Static;
             }
