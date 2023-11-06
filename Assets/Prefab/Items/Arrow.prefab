@@ -113,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 60.25, y: 8.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4607531168975942658}
@@ -134,7 +134,7 @@ MonoBehaviour:
   _damage: 1
   _destroyAfterUsing: 1
   _delayUsing: 0.1
-  _undamagedWeapon: 0
+  undamagedWeapon: 0
   speed: 100
   lifeDuration: 5
 --- !u!58 &7960278415789448536
