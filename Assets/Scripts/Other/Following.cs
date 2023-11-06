@@ -44,8 +44,8 @@ namespace Scripts.Other
         //     _isMove = false;
         // }
 
-        private Vector2 GetVector() => _trackingObject.position;
+        // private Vector2 GetVector() => _trackingObject.position;
 
-        // private Vector2 GetVector() => new (_trackingObject.position.x, transform.position.y);
+        private Vector2 GetVector() => new (_trackingObject.position.x, transform.position.y);
     }
 }
