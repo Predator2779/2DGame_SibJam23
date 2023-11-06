@@ -89,8 +89,8 @@ namespace Scripts.Character.Classes
                 Destroy(gameObject);
                 return;
             }
-            
-            Destroy(_level);
+
+            EventHandler.OnPlayerDeath?.Invoke();
         }
 
         #endregion
