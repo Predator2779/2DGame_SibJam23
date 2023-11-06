@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +13,7 @@ public class CutsceneSwitcher : MonoBehaviour
     private void Start()
     {
         InitializeCutscene();
+        EventHandler.OnBossKilled.AddListener(ActivateFinalScene);
     }
 
     private void Update()
@@ -57,10 +57,17 @@ public class CutsceneSwitcher : MonoBehaviour
         return gObjs.ToArray();
     }
 
+    private void ActivateFinalScene()
+    {
+        _slides[_cutScenes.Length -1].SetActive(true);
+        _slides[_currentSlide].SetActive(true);
+    }
+    
     private void FinilizeCutscene()
     {
         _slides[_currentSlide].SetActive(false);
         _cutScenes[_currentCutscene].SetActive(false);
+        _currentSlide = 0;
         _currentCutscene++;
         _isShowed = false;
     }

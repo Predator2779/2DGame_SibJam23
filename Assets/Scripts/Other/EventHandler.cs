@@ -10,4 +10,5 @@ public static class EventHandler
     public static UnityEvent<string> OnItemSetUsable = new();
     public static UnityEvent<string> OnPlayerKilled = new();
     public static UnityEvent OnTearCounterEnable = new();
+    public static UnityEvent OnBossKilled = new();
 }
