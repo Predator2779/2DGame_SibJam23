@@ -38,7 +38,9 @@ namespace Scripts.Character.Classes
 
         public override void Death()
         {
+            base.Death();
             
+            EventHandler.OnBossKilled?.Invoke();
         }
     }
 }

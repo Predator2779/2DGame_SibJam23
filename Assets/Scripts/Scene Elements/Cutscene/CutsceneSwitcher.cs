@@ -1,15 +1,18 @@
 using System.Collections.Generic;
+using Scripts.Core.Global;
 using UnityEngine;
 
 public class CutsceneSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject[] _cutScenes;
     [SerializeField] private GameObject _levelAudio;
-    
+
     private GameObject[] _slides;
     private bool _isShowed;
     private int _currentCutscene;
     private int _currentSlide;
+    private GameStates _gStates;
+    private bool _final;
 
     private void Start()
     {
@@ -61,9 +64,11 @@ public class CutsceneSwitcher : MonoBehaviour
 
     private void ActivateFinalScene()
     {
+        _final = true;
         _slides[_cutScenes.Length - 1].SetActive(true);
         _slides[_currentSlide].SetActive(true);
     }
+
 
     private void FinilizeCutscene()
     {
@@ -73,5 +78,7 @@ public class CutsceneSwitcher : MonoBehaviour
         _currentCutscene++;
         _levelAudio.SetActive(true);
         _isShowed = false;
+
+        if (_final) EventHandler.OnLevelDestroy?.Invoke();
     }
 }

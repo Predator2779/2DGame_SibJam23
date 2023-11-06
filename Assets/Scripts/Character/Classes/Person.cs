@@ -85,8 +85,7 @@ namespace Scripts.Character.Classes
             EventHandler.OnEnemyKilled?.Invoke();
             Destroy(gameObject);
 
-            if (_isPlayer)
-                EventHandler.OnPlayerDeath?.Invoke();
+            if (_isPlayer) EventHandler.OnPlayerDeath?.Invoke();
         }
 
         #endregion

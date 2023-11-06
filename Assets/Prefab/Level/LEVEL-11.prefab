@@ -4129,7 +4129,7 @@ MonoBehaviour:
   _isPlayer: 0
   _movementSpeed: 2
   _jumpForce: 0
-  _loot: {fileID: 0}
+  _loot: {fileID: 3396698439206600077, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
   heldWeapon: {fileID: 4941152632257129301}
   attackDamage: 5
   weaponTrigger: {fileID: 570149498426493321}
@@ -4154,6 +4154,7 @@ MonoBehaviour:
   rangedTrigger: {fileID: 8122941762018994243}
   rangedDuration: 1
   rangedCooldown: 20
+  _isTest: 0
   _enemy: {fileID: 0}
 --- !u!1 &2034466975922292106
 GameObject:
@@ -14310,6 +14311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cutScenes:
   - {fileID: 4194747222281237155}
+  - {fileID: 4299683700818727549}
   _levelAudio: {fileID: 2202742458788062865}
 --- !u!1 &7201880329304986268
 GameObject:
