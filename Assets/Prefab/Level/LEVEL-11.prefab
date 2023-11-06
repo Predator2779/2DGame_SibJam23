@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
+  m_fontSize: 28.55
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7964,8 +7964,8 @@ Transform:
   m_GameObject: {fileID: 4703383465183244213}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 99.7, y: 1.8, z: -2}
-  m_LocalScale: {x: 1.61, y: 1.87, z: 1}
+  m_LocalPosition: {x: 99.7, y: -0.76, z: -2}
+  m_LocalScale: {x: 1.61, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2619190197178813768}
@@ -8148,7 +8148,7 @@ Transform:
   m_GameObject: {fileID: 4757922962439440523}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 66.9, y: 49.9, z: -2}
+  m_LocalPosition: {x: 66.9, y: 42, z: -2}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12427,14 +12427,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7188493877268590182}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 74.3, y: -2.7, z: -2}
-  m_LocalScale: {x: 1.61, y: 1.87, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 74.3, y: -12.6, z: -2}
+  m_LocalScale: {x: 1.85, y: 1.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5930934880555702466}
   m_Father: {fileID: 1788795254849806484}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &48715039648896383
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16573,10 +16573,10 @@ RectTransform:
   - {fileID: 6285630338951794684}
   m_Father: {fileID: 4158373582298361231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!82 &2936436488945966725
 AudioSource:
