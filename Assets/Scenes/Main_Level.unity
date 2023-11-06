@@ -2817,12 +2817,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1891904770771292666, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
+      propertyPath: m_Size.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891904770771292666, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4807710653343955113, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
       propertyPath: m_Name
       value: LEVEL-10
       objectReference: {fileID: 0}
     - target: {fileID: 4807710653343955113, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8495306559699196352, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
+      propertyPath: m_Size.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831612931592696064, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
+      propertyPath: m_Size.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831612931592696064, guid: 78d242fd8d21978468766ece4475fd67, type: 3}
+      propertyPath: m_Offset.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
