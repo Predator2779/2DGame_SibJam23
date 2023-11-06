@@ -74,6 +74,7 @@ public class BossAI : CharacterAI
         }
         
         Debug.Log(_state);
+        
         switch (_state)
         {
             case BossAIState.Idle:
