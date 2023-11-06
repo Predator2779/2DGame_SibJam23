@@ -22,12 +22,12 @@ namespace Character.AI
         protected override void Awake()
         {
             _archer = GetComponent<Archer>();
+            _enemy = GameObject.FindWithTag("Player");
 
             attackTrigger._triggerEnterCallback = (_, c) =>
             {
                 if (c.CompareTag("Player"))
                 {
-                    _enemy = c.gameObject;
                     _isInRange = true;
                 }
             };
@@ -35,7 +35,6 @@ namespace Character.AI
             {
                 if (c.CompareTag("Player"))
                 {
-                    _enemy = null;
                     _isInRange = false;
                 }
             };
