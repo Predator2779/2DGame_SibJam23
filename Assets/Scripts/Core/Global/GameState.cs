@@ -20,6 +20,8 @@ namespace Scripts.Core.Global
             else if (instance == this) Destroy(gameObject);
             
             EventHandler.OnPlayerDeath.AddListener(DestroyLevel);
+            
+            State = GameStates.Playing;
         }
 
         private void Update()
