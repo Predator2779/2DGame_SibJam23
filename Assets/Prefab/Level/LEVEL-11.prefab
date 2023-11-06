@@ -8261,7 +8261,7 @@ MonoBehaviour:
   _isPlayer: 0
   _movementSpeed: 0
   _jumpForce: 0
-  _loot: {fileID: 0}
+  _loot: {fileID: 3396698439206600077, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
   arrowPrefab: {fileID: 9180132922819560335, guid: e5c3911987423a641b79bbc7970897b8, type: 3}
 --- !u!114 &2492487181450141750
 MonoBehaviour:
@@ -16809,6 +16809,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5238258020723647861, guid: b51c0fdd17aba9947a46d967fd6349ab, type: 3}
+      propertyPath: _loot
+      value: 
+      objectReference: {fileID: 3396698439206600077, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16879,6 +16883,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5238258020723647861, guid: b51c0fdd17aba9947a46d967fd6349ab, type: 3}
+      propertyPath: _loot
+      value: 
+      objectReference: {fileID: 3396698439206600077, guid: c312edfc1b77b26498d85a9cb9a868ce, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
