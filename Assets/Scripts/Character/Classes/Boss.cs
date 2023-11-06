@@ -35,5 +35,10 @@ namespace Scripts.Character.Classes
         }
 
         private void MultiplyDamage(Weapon weapon) => weapon.DamageFactor = attackDamage;
+
+        public override void Death()
+        {
+            
+        }
     }
 }

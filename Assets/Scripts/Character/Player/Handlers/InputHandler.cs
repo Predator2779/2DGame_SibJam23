@@ -20,6 +20,7 @@ namespace Scripts.Character.Player.Handlers
         private void Awake()
         {
             if (_gameState == null) _gameState = FindObjectOfType<GameState>();
+            
             _player = GetComponent<Person>();
             _pickItem = GetComponent<PickItem>();
         }

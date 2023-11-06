@@ -10,7 +10,6 @@ namespace Scripts.Character.Classes
     [RequireComponent(typeof(Rigidbody2D))]
     public class Person : MonoBehaviour
     {
-        [SerializeField] private GameObject _level;
         [SerializeField] private SpriteRenderer _spriteRend;
         [SerializeField] private bool _isPlayer;
         [SerializeField] [Range(0, 10)] private int _movementSpeed;
@@ -21,7 +20,7 @@ namespace Scripts.Character.Classes
         [NonSerialized] public UsableItem item;
         private Rigidbody2D _rbody;
         private bool _isGround;
-        
+
         private void Awake()
         {
             _spriteRend ??= GetComponentInChildren<SpriteRenderer>();
@@ -50,11 +49,11 @@ namespace Scripts.Character.Classes
             if (direction.x < 0) SetSpriteSide(TurnHandler.playerSides.Left);
             if (direction.x > 0) SetSpriteSide(TurnHandler.playerSides.Right);
         }
-        
+
         public void MoveTo(Vector2 movementDirection)
         {
             CheckSpriteSide(movementDirection);
-            
+
             float speed = _movementSpeed * GlobalConstants.CoefMovementSpeed;
 
             ExecuteCommand(new MoveCommand(_rbody, movementDirection, speed));
@@ -63,7 +62,7 @@ namespace Scripts.Character.Classes
         public void Jump()
         {
             if (!_isGround) return;
-            
+
             ExecuteCommand(new JumpCommand(_rbody,
                     Vector2.up * _jumpForce,
                     ForceMode2D.Impulse));
@@ -79,18 +78,15 @@ namespace Scripts.Character.Classes
             ExecuteCommandByValue(new RotationCommand(obj), angle);
         }
 
-        public void Death()
+        public virtual void Death()
         {
-            if (!_isPlayer)
-            {
-                Vector2 pos = new Vector2(transform.position.x,  transform.position.y - transform.localScale.y / 2);
-                Instantiate(_loot, pos, quaternion.identity);
-                EventHandler.OnEnemyKilled?.Invoke();
-                Destroy(gameObject);
-                return;
-            }
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y - transform.localScale.y / 2);
+            Instantiate(_loot, pos, quaternion.identity);
+            EventHandler.OnEnemyKilled?.Invoke();
+            Destroy(gameObject);
 
-            EventHandler.OnPlayerDeath?.Invoke();
+            if (_isPlayer)
+                EventHandler.OnPlayerDeath?.Invoke();
         }
 
         #endregion
@@ -105,7 +101,7 @@ namespace Scripts.Character.Classes
         {
             if (other.transform.CompareTag("Ground")) _isGround = true;
         }
-        
+
         private void OnCollisionExit2D(Collision2D other)
         {
             if (other.transform.CompareTag("Ground")) _isGround = false;
