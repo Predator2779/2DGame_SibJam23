@@ -11,8 +11,8 @@ namespace Scripts.Core.Global
         [SerializeField] private GameObject _menuPanel;
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _levelPrefab;
-        [SerializeField] private GameObject _currentLevel;
-        [SerializeField] private CutsceneSwitcher _cutsceneSwitcher;
+        
+        private GameObject _currentLevel;
 
         void Start()
         {
