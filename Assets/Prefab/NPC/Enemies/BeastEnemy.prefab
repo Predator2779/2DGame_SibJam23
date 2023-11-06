@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3670227925785583698}
   - component: {fileID: 2520005837295693849}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3372375344214991152}
   - component: {fileID: 8849570856268012490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 1365135542984009206}
   - component: {fileID: 2345385653589993629}
   - component: {fileID: 5374861787300391200}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8811523778415600860}
   - component: {fileID: 3990881419827828096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 2542031862504481955}
   - component: {fileID: 7884973016681218567}
   - component: {fileID: 3561143148401932961}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 8215078166109179118}
   - component: {fileID: 5975554962371726232}
   - component: {fileID: 8003040214969341340}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 6590833046349196411}
   - component: {fileID: 2316709299523788446}
   - component: {fileID: 4386198361644033215}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 9023556115800809645}
   - component: {fileID: 249957709233517301}
   - component: {fileID: 9101754183304409944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WeaponTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 7091201190277704321}
   - component: {fileID: 5957043506400857052}
   - component: {fileID: 8385209575964693446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BeastEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

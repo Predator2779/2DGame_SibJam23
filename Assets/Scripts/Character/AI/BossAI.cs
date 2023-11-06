@@ -72,13 +72,14 @@ public class BossAI : CharacterAI
             case BossAIState.Idle:
                 break;
             case BossAIState.Armed:
-                
+
                 if (_enemy == null) return;
 
                 Vector2 moveDirection = GetMoveDirection();
 
                 _boss.MoveTo(moveDirection);
-                
+                CheckSpriteSide();
+
                 if (_boss.heldWeapon.gameObject.activeSelf && _isInRange &&
                     Time.time - _rangedTimestamp > rangedDuration + rangedCooldown)
                 {
@@ -99,8 +100,9 @@ public class BossAI : CharacterAI
                 if (_thrownWeapon != null)
                 {
                     var direction = (_thrownWeapon.transform.position.x - transform.position.x);
-                    _boss.MoveTo((direction * Vector2.right).normalized);
-                    _boss.SetSpriteSide(direction > 0 ? TurnHandler.playerSides.Left : TurnHandler.playerSides.Right);
+                    _boss.MoveTo(Math.Abs(direction) > 1
+                        ? (direction * Vector2.right).normalized
+                        : direction * Vector2.right);
                 }
                 else
                 {
@@ -109,6 +111,7 @@ public class BossAI : CharacterAI
 
                 break;
             case BossAIState.MeleeAttack:
+                _boss.StopMove();
                 if (Time.time - _meleeTimestamp > meleeDuration)
                 {
                     _state = BossAIState.Armed;
@@ -116,6 +119,7 @@ public class BossAI : CharacterAI
 
                 break;
             case BossAIState.RangedAttack:
+                _boss.StopMove();
                 if (Time.time - _rangedTimestamp > rangedDuration)
                 {
                     _state = BossAIState.Disarmed;
@@ -149,15 +153,23 @@ public class BossAI : CharacterAI
             _state = _boss.heldWeapon.gameObject.activeSelf ? BossAIState.Armed : BossAIState.Disarmed;
         }
     }
-    
+
     private Vector2 GetMoveDirection()
     {
-        // var target = (rangedDuration + rangedCooldown) - (Time.time - _rangedTimestamp) < 2
-        //     ? rangedTrigger.transform.position.x
-        //     : meleeTrigger.transform.position.x;
-        return (Vector2.right * (_enemy.position.x - transform.position.x)).normalized;
+        var target = (rangedDuration + rangedCooldown) - (Time.time - _rangedTimestamp) < 2
+            ? rangedTrigger.transform.position.x
+            : meleeTrigger.transform.position.x;
+        var direction = (Vector2.right * (_enemy.position.x - target));
+        return direction.sqrMagnitude > 1 ? direction.normalized : direction;
     }
-    
+
+    private void CheckSpriteSide()
+    {
+        _boss.SetSpriteSide(_enemy.transform.position.x > transform.position.x
+            ? TurnHandler.playerSides.Right
+            : TurnHandler.playerSides.Left);
+    }
+
     private enum BossAIState
     {
         Idle,

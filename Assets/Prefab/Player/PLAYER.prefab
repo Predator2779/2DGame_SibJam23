@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5107517491260015790}
   - component: {fileID: 4266964242093209571}
   - component: {fileID: 2668848284907444196}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 947640744612794769}
   - component: {fileID: 5534245865446635283}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ItemTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4103034828022791341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PLAYER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 3374691371549033108}
   - component: {fileID: 5531135499581265105}
   - component: {fileID: 375629666968696353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 1718768313483132964}
   - component: {fileID: 4204717198823248192}
   - component: {fileID: 945595242006577531}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite&Anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 8083823721146511018}
   - component: {fileID: 6118993106576291928}
   - component: {fileID: 594003819595418048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 6752148101039292925}
   - component: {fileID: 250758232132631680}
   - component: {fileID: 7536808777275417121}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 645643826596838208}
   - component: {fileID: 6454640801031886616}
   - component: {fileID: 7251347548188041602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -943,7 +943,7 @@ GameObject:
   - component: {fileID: 1862446572301174700}
   - component: {fileID: 6421197738874172513}
   - component: {fileID: 5641947666974481728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Reflections
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 7554658227091721704}
   - component: {fileID: 1051333692893516667}
   - component: {fileID: 4440344113042679975}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TearProcessor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 6177261737194302648}
   - component: {fileID: 4253131226122399743}
   - component: {fileID: 7587655197729903694}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Dialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
