@@ -67,8 +67,8 @@ public class CutsceneSwitcher : MonoBehaviour
         _levelAudio.SetActive(false);
         _final = true;
         _cutScenes[_cutScenes.Length - 1].SetActive(true);
-        _currentSlide = 0;
         _slides = GetAllChilds(_cutScenes[_currentCutscene]);
+        _currentSlide = 0;
         _slides[_currentSlide].SetActive(true);
         _isShowed = true;
     }

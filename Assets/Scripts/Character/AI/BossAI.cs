@@ -12,8 +12,6 @@ public class BossAI : CharacterAI
     [SerializeField] private Trigger rangedTrigger;
     [SerializeField] private float rangedDuration;
     [SerializeField] private float rangedCooldown;
-
-    public bool _isTest;
     
     private float _meleeTimestamp = float.MinValue;
     private bool _isInMeleeRange;
@@ -68,11 +66,6 @@ public class BossAI : CharacterAI
 
     protected override void Update()
     {
-        if (_isTest)
-        {
-            _boss.Death();
-        }
-        
         Debug.Log(_state);
         
         switch (_state)
