@@ -4,7 +4,8 @@ using UnityEngine;
 public class CutsceneSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject[] _cutScenes;
-
+    [SerializeField] private GameObject _levelAudio;
+    
     private GameObject[] _slides;
     private bool _isShowed;
     private int _currentCutscene;
@@ -26,6 +27,7 @@ public class CutsceneSwitcher : MonoBehaviour
     public void InitializeCutscene()
     {
         _isShowed = true;
+        _levelAudio.SetActive(false);
         _slides = GetAllChilds(_cutScenes[_currentCutscene]);
         _cutScenes[_currentCutscene].SetActive(true);
         _slides[_currentSlide].SetActive(true);
@@ -66,9 +68,10 @@ public class CutsceneSwitcher : MonoBehaviour
     private void FinilizeCutscene()
     {
         _slides[_currentSlide].SetActive(false);
-        _cutScenes[_currentCutscene].gameObject.SetActive(false);
+        _cutScenes[_currentCutscene].SetActive(false);
         _currentSlide = 0;
         _currentCutscene++;
+        _levelAudio.SetActive(true);
         _isShowed = false;
     }
 }
