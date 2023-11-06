@@ -4,7 +4,7 @@ using UnityEngine;
 public class CutsceneSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject[] _cutScenes;
-    
+
     private GameObject[] _slides;
     private bool _isShowed;
     private int _currentCutscene;
@@ -19,7 +19,7 @@ public class CutsceneSwitcher : MonoBehaviour
     private void Update()
     {
         if (!_isShowed) return;
-        
+
         if (Input.GetKeyUp(KeyCode.Space)) NextScene();
     }
 
@@ -30,25 +30,25 @@ public class CutsceneSwitcher : MonoBehaviour
         _cutScenes[_currentCutscene].SetActive(true);
         _slides[_currentSlide].SetActive(true);
     }
-    
+
     private void NextScene()
     {
         _slides[_currentSlide].SetActive(false);
 
-        if (_slides.Length < _currentSlide + 1)
+        if (_slides.Length > _currentSlide + 1)
         {
-            FinilizeCutscene();
+            _currentSlide++;
+            _slides[_currentSlide].SetActive(true);
             return;
         }
 
-        _currentSlide++;
-        _slides[_currentSlide].SetActive(true);
+        FinilizeCutscene();
     }
 
     private GameObject[] GetAllChilds(GameObject g)
     {
         List<GameObject> gObjs = new();
-        
+
         int count = g.transform.childCount;
 
         for (int i = 0; i < count; i++)
@@ -59,14 +59,14 @@ public class CutsceneSwitcher : MonoBehaviour
 
     private void ActivateFinalScene()
     {
-        _slides[_cutScenes.Length -1].SetActive(true);
+        _slides[_cutScenes.Length - 1].SetActive(true);
         _slides[_currentSlide].SetActive(true);
     }
-    
+
     private void FinilizeCutscene()
     {
         _slides[_currentSlide].SetActive(false);
-        _cutScenes[_currentCutscene].SetActive(false);
+        _cutScenes[_currentCutscene].gameObject.SetActive(false);
         _currentSlide = 0;
         _currentCutscene++;
         _isShowed = false;
