@@ -211,8 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 476167869462963906}
   _healthBar: {fileID: 476167870097791277}
-  _maxHitPoints: 25
-  _currentHitPoints: 0
+  _maxHitPoints: 100
+  _currentHitPoints: 100
   _coefDefense: 4
 --- !u!114 &85114605416121699
 MonoBehaviour:

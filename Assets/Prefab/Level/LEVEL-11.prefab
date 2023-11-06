@@ -6005,7 +6005,7 @@ GameObject:
   - component: {fileID: 1515153595185272367}
   - component: {fileID: 4772509658200639272}
   - component: {fileID: 3624952119112109879}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WeaponTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6253,7 +6253,6 @@ MonoBehaviour:
   rangedTrigger: {fileID: 3026820845333503281}
   rangedDuration: 1
   rangedCooldown: 20
-  _isTest: 0
   _enemy: {fileID: 0}
 --- !u!1 &3654973834904832320
 GameObject:
@@ -14981,8 +14980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 3627866209228602156}
   _healthBar: {fileID: 2701877373943187737}
-  _maxHitPoints: 20
-  _currentHitPoints: 20
+  _maxHitPoints: 40
+  _currentHitPoints: 40
   _coefDefense: 1
 --- !u!114 &2582926017581721854
 MonoBehaviour:
