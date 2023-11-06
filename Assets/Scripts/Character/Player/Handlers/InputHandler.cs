@@ -17,13 +17,9 @@ namespace Scripts.Character.Player.Handlers
         private float _verticalAxis;
         private float _horizontalAxis;
 
-        private void OnValidate()
-        {
-            if (_gameState == null) _gameState = FindObjectOfType<GameState>();
-        }
-
         private void Awake()
         {
+            if (_gameState == null) _gameState = FindObjectOfType<GameState>();
             _player = GetComponent<Person>();
             _pickItem = GetComponent<PickItem>();
         }
