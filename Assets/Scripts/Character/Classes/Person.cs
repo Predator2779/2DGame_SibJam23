@@ -19,7 +19,8 @@ namespace Scripts.Character.Classes
 
         [NonSerialized] public UsableItem item;
         private Rigidbody2D _rbody;
-
+        private bool _isGround;
+        
         private void Awake()
         {
             _spriteRend ??= GetComponentInChildren<SpriteRenderer>();
@@ -60,6 +61,8 @@ namespace Scripts.Character.Classes
 
         public void Jump()
         {
+            if (!_isGround) return;
+            
             ExecuteCommand(new JumpCommand(_rbody,
                     Vector2.up * _jumpForce,
                     ForceMode2D.Impulse));
@@ -79,7 +82,7 @@ namespace Scripts.Character.Classes
         {
             if (!_isPlayer)
             {
-                Vector2 pos = new Vector2(transform.position.x, -transform.localScale.y / 2);
+                Vector2 pos = new Vector2(transform.position.x,  transform.position.y - transform.localScale.y / 2);
                 Instantiate(_loot, pos, quaternion.identity);
                 EventHandler.OnEnemyKilled?.Invoke();
                 Destroy(gameObject);
@@ -96,6 +99,16 @@ namespace Scripts.Character.Classes
         private void ExecuteCommand(Command command) => command.Execute();
 
         private void ExecuteCommandByValue(Command command, float value) => command.ExecuteByValue(value);
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground")) _isGround = true;
+        }
+        
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground")) _isGround = false;
+        }
 
         #endregion
     }
